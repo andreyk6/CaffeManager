@@ -27,6 +27,15 @@
         {
            Database.SetInitializer(new CaffeModelInitializer());
         }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Manager>().HasMany(m => m.Cashiers).WithRequired(c => c.Manager);
+            modelBuilder.Entity<Cashier>().HasMany(c => c.Orders).WithRequired(o => o.Cashier);
+            modelBuilder.Entity<Order>().HasMany(o => o.OrderItems).WithRequired(oi => oi.Order);
+            modelBuilder.Entity<OrderItem>().HasRequired(oi => oi.MenuItem);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 
     public class CaffeModelInitializer : DropCreateDatabaseAlways<CaffeDbContext>
