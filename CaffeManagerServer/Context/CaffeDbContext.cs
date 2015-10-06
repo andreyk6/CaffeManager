@@ -44,30 +44,38 @@
         {
             var manager1 = new Manager("manager1", "password") { Name = "Manager1" };
             manager1.Cashiers = new List<Cashier>();
-            context.Managers.Add(manager1);
 
-            var cashier1 = new Cashier("cashier", "password") { Name = "Cashier1", Manager = manager1 };
+            var cashier1 = new Cashier("cashier", "password") { Name = "Cashier1", //Manager = manager1 
+            };
             cashier1.Orders = new List<Order>();
-            context.Cashiers.Add(cashier1);
             manager1.Cashiers.Add(cashier1);
 
             var menuItem1 = new MenuItem() { Name = "Soup", Price = 100 };
-            context.MenuItems.Add(menuItem1);
             var menuItem2 = new MenuItem() { Name = "Soup2", Price = 200 };
-            context.MenuItems.Add(menuItem2);
 
-
-            var order1 = new Order() { Cashier = cashier1 };
+            var order1 = new Order();
             order1.OrderItems = new List<OrderItem>();
-            context.Orders.Add(order1);
             cashier1.Orders.Add(order1);
 
-            var orderItem1 = new OrderItem() { MenuItem = menuItem1, Count = 10, Order = order1 };
-            context.OrderItems.Add(orderItem1);
+            var order2 = new Order();
+            order2.OrderItems = new List<OrderItem>();
+            cashier1.Orders.Add(order2);
+            
+            var orderItem1 = new OrderItem(menuItem1) { Count = 10, //MenuItem = menuItem1, Order = order1 
+            };
             order1.OrderItems.Add(orderItem1);
-            var orderItem2 = new OrderItem() { MenuItem = menuItem2, Count = 10, Order = order1 };
+            var orderItem2 = new OrderItem(menuItem2) { Count = 10, //MenuItem = menuItem2, Order = order1 
+            };
+            order2.OrderItems.Add(orderItem2);
+
+            context.MenuItems.Add(menuItem1);
+            context.MenuItems.Add(menuItem2);
+            context.OrderItems.Add(orderItem1);
             context.OrderItems.Add(orderItem2);
-            order1.OrderItems.Add(orderItem2);
+            context.Orders.Add(order1);
+            context.Orders.Add(order2);
+            context.Cashiers.Add(cashier1);
+            context.Managers.Add(manager1);
 
             context.SaveChanges();
             //base.Seed(context);
