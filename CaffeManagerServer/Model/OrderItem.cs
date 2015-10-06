@@ -8,17 +8,30 @@ namespace CaffeManagerServer.Model
     public class OrderItem
     {
         public int Id { get; set; }
+
+        private decimal _count;
+
         public decimal Count
         {
             get
             {
-                return Count;
+                return _count;
             }
             set
             {
-                TotalPrice = MenuItem.Price * value;
-                Count = value;
+                if (MenuItem != null)
+                    TotalPrice = MenuItem.Price * value;
+                _count = value;
             }
+        }
+
+        private OrderItem()
+        {
+            MenuItem = new MenuItem();
+        }
+        public OrderItem(MenuItem menuItem)
+        {
+            MenuItem = menuItem;
         }
 
         public int MenuItemId { get; set; }
