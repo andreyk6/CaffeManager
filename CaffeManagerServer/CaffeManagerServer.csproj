@@ -103,15 +103,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\CaffeDatabase.mdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App_Data\CaffeDatabase_log.ldf">
-      <DependentUpon>CaffeDatabase.mdf</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="CaffeDataService.svc" />
-    <Content Include="CaffeManagerDataService.svc" />
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
@@ -132,9 +124,6 @@
     <Compile Include="CaffeDataService.svc.cs">
       <DependentUpon>CaffeDataService.svc</DependentUpon>
     </Compile>
-    <Compile Include="CaffeManagerDataService.svc.cs">
-      <DependentUpon>CaffeManagerDataService.svc</DependentUpon>
-    </Compile>
     <Compile Include="Context\CaffeDbContext.cs" />
     <Compile Include="Model\Cashier.cs" />
     <Compile Include="Model\Manager.cs" />
@@ -144,7 +133,9 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
