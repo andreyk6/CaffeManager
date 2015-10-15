@@ -10,16 +10,25 @@ namespace CaffeManagerServer.Controller
     public class UserController : ApiController
     {
         // GET: api/User
-        public IEnumerable<string> Get()
+        [HttpGet]
+        public IEnumerable<string> A()
         {
             return new string[] { "value1", "value2" };
         }
 
         // GET: api/User/5
         [Authorize]
-        public string Get(int id)
+        [HttpGet]
+        public string B(int id)
         {
             return "value";
+        }
+
+        [HttpGet]
+        [Authorize(Roles ="Manager")]
+        public int D(int id,int id2)
+        {
+            return id;
         }
 
         // POST: api/User

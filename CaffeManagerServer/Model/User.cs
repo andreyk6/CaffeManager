@@ -9,21 +9,16 @@ namespace CaffeManagerServer.Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Login { get; private set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public string Role { get; set; }
 
-        public User() : this("baseLogin", "basePassword") { }
+        protected User() { }
 
         public User(string login, string password)
         {
             Login = login;
-            _password = password; 
+            Password = password;
         }
-
-        public bool Loggin(string password)
-        {
-            return password == _password;
-        }
-
-        private string _password;
     }
 }

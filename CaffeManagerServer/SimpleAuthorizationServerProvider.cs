@@ -2,6 +2,9 @@
 using System.Threading.Tasks;
 using System;
 using System.Security.Claims;
+using CaffeManagerServer.Context;
+using CaffeManagerServer.Model;
+using System.Linq;
 
 namespace CaffeManagerServer
 {
@@ -16,26 +19,27 @@ namespace CaffeManagerServer
         {
 
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
-            
-            //TODO: Search for user in DB
+            User user;
 
-            //using (AuthRepository _repo = new AuthRepository())
-            //{
-            //    IdentityUser user = await _repo.FindUser(context.UserName, context.Password);
+            using (CaffeDbContext _db = new CaffeDbContext())
+            {
+                user = _db.Managers.ToList().FirstOrDefault(u => u.Login == context.UserName);
+                if (user == null)
+                {
+                    user = _db.Cashiers.ToList().FirstOrDefault(u => u.Login == context.UserName);
+                }
 
-            //    if (user == null)
-            //    {
-            //        context.SetError("invalid_grant", "The user name or password is incorrect.");
-            //        return;
-            //    }
-            //}
+                if (user == null || context.Password != user.Password)
+                {
+                    context.SetError("invalid_grant", "The user name or password is incorrect.");
+                    return;
+                }
+            }
 
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
-            identity.AddClaim(new Claim("sub", context.UserName));
-            identity.AddClaim(new Claim("role", "user"));
+            identity.AddClaim(new Claim(ClaimTypes.Role, user.Role));
 
             context.Validated(identity);
-
         }
     }
 }

@@ -7,10 +7,12 @@ namespace CaffeManagerServer.Model
 {
     public class Manager : User
     {
-        public Manager() : this("login", "password") { }
+        private Manager() { }
         public Manager(string login, string password)
             : base(login, password)
-        { }
+        {
+            this.Role = "Manager";
+        }
 
         public virtual ICollection<Cashier> Cashiers { get; set; }
     }
