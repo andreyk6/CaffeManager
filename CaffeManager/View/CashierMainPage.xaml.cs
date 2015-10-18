@@ -1,5 +1,4 @@
-﻿using CaffeManager.View;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CaffeManager
+namespace CaffeManager.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для CashierMainPage.xaml
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class CashierMainPage : Page
     {
-        public MainWindow()
+        public CashierMainPage()
         {
             InitializeComponent();
-            NavigationService.Navigate(new Login());    
         }
     }
 }

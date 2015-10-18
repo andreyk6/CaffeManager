@@ -1,0 +1,54 @@
+﻿<Page x:Class="CaffeManager.View.ManagerMainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CaffeManager"
+      xmlns:chart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+      mc:Ignorable="d" 
+      
+      Title="ManagerMainPage">
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Left">
+            <Label DockPanel.Dock="Top" Content="Your cashiers"/>
+            <Button DockPanel.Dock="Bottom" Name="AddCashier" Content="Add cashier"></Button>
+            <ListView DockPanel.Dock="Bottom" Name="Cashiers">
+                <CheckBox Content="Cashier0"/>
+                <CheckBox Content="Cashier1"/>
+            </ListView>
+        </DockPanel>
+        <Border Width="1" Margin="2" Background="#8888"/>
+        <StackPanel DockPanel.Dock="Bottom">
+            <Label Content="Settings:" />
+            <DockPanel>
+                <CheckBox Name="ServedVisitors" Content="Number of served visitors"></CheckBox>
+                <CheckBox Name="Profit" Content="Sales profit"></CheckBox>
+                <CheckBox Name="AvgProfit" Content="Average profit per visitor"></CheckBox>
+            </DockPanel>
+            <Border Height="1" Margin="2" Background="#8888"/>
+            <DockPanel>
+                <Label Content="Show stats for last * days:"></Label>
+                <TextBox/>
+            </DockPanel>
+            <!-- Stats -->
+        </StackPanel>
+        <StackPanel>
+            <Label Content="Cashiers statistics:" />
+            <chart:PieChart Width="500" Height="250"
+        ChartTitle="Minimal Pie Chart"
+        ChartSubTitle="Chart with fixed width and height"
+        SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}" >
+                <chart:PieChart.Series>
+                    <chart:ChartSeries
+                SeriesTitle="Errors"
+                DisplayMember="Category"
+                ValueMember="Number"
+                ItemsSource="{Binding Path=Errors}" />
+                </chart:PieChart.Series>
+            </chart:PieChart>
+            <!-- Stats -->
+        </StackPanel>
+        
+
+    </DockPanel>
+</Page>
