@@ -1,12 +1,9 @@
 ﻿namespace CaffeManagerServer.Context
 {
-    using System;
-    using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity;
-    using System.Linq;
-    using Model;
     using System.Collections.Generic;
-    using System.Data.Entity.Infrastructure;
+    using System.Linq;
+    using CafeManagerLib.ModelShared;
 
     public class CaffeDbContext : DbContext
     {
@@ -16,6 +13,15 @@
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         
+
+        public User GetUserByName(string userName)
+        {
+            User user = Managers.ToList().FirstOrDefault(u => u.Login == userName);
+            if (user == null)
+                user = Cashiers.ToList().FirstOrDefault(u => u.Login == userName);
+
+            return user;
+        }
         public CaffeDbContext()
             : base("name=CaffeDatabase")
         {

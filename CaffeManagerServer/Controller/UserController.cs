@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CafeManagerLib.Client;
+using CafeManagerLib.ModelShared;
+using CaffeManagerServer.Context;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,41 +12,15 @@ namespace CaffeManagerServer.Controller
 {
     public class UserController : ApiController
     {
+        private CaffeDbContext _db = new CaffeDbContext();
+
         // GET: api/User
-        [HttpGet]
-        public IEnumerable<string> A()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET: api/User/5
         [Authorize]
-        [HttpGet]
-        public string B(int id)
+        [HttpPost]
+        public UserClientModel Info()
         {
-            return "value";
-        }
-
-        [HttpGet]
-        [Authorize(Roles ="Manager")]
-        public int D(int id,int id2)
-        {
-            return id;
-        }
-
-        // POST: api/User
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/User/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/User/5
-        public void Delete(int id)
-        {
+            User user = _db.GetUserByName(User.Identity.Name);
+            return new UserClientModel(user, Request.Headers.Authorization.Parameter);
         }
     }
 }

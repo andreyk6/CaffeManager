@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using System;
 using System.Security.Claims;
 using CaffeManagerServer.Context;
-using CaffeManagerServer.Model;
 using System.Linq;
+using CafeManagerLib.ModelShared;
 
 namespace CaffeManagerServer
 {
@@ -23,11 +23,7 @@ namespace CaffeManagerServer
 
             using (CaffeDbContext _db = new CaffeDbContext())
             {
-                user = _db.Managers.ToList().FirstOrDefault(u => u.Login == context.UserName);
-                if (user == null)
-                {
-                    user = _db.Cashiers.ToList().FirstOrDefault(u => u.Login == context.UserName);
-                }
+                user = _db.GetUserByName(context.UserName);
 
                 if (user == null || context.Password != user.Password)
                 {
@@ -37,7 +33,8 @@ namespace CaffeManagerServer
             }
 
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
-            identity.AddClaim(new Claim(ClaimTypes.Role, user.Role));
+            identity.AddClaim(new Claim(ClaimTypes.Name, user.Login));
+            identity.AddClaim(new Claim(ClaimTypes.Role, user.Role.ToString()));
 
             context.Validated(identity);
         }
