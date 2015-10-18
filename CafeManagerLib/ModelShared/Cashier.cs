@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace CaffeManagerServer.Model
+namespace CafeManagerLib.ModelShared
 {
     public class Cashier : User
     {
@@ -11,7 +11,7 @@ namespace CaffeManagerServer.Model
         public Cashier(string login, string password)
             : base(login, password)
         {
-            this.Role = "Cashier";
+            this.Role = UserRoles.Cashier.ToString();
         }
 
         public int ManagerId { get; set; }

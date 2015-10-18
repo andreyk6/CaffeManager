@@ -1,9 +1,11 @@
-﻿using System;
+﻿using CafeManagerLib.ModelShared;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace CaffeManagerServer.Model
+namespace CafeManagerLib.ModelShared
 {
     public class User
     {
@@ -11,7 +13,7 @@ namespace CaffeManagerServer.Model
         public string Name { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public string Role { get; set; }
+        public String Role { get; set; }
 
         protected User() { }
 
