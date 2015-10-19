@@ -11,14 +11,14 @@ namespace CaffeManager
 {
     public class WebApiClient
     {
-        private string _appPath;
-        private string _token;
+        public string AppPath { get; set; }
+        public string Token { get; set; }
 
         public WebApiClient(string appPath, string login, string password)
         {
-            _appPath = appPath;
-            _token = GetToken(appPath, login, password);
-            if (_token == null)
+            AppPath = appPath;
+            Token = GetToken(appPath, login, password);
+            if (Token == null)
             {
                 throw new MemberAccessException(String.Format("Couldn`t login at {0}, as {1}:{2}", 
                     appPath, login, password)
@@ -30,9 +30,9 @@ namespace CaffeManager
             string getUserInfoPath = "/api/User/Info";
             try
             {
-                using (var client = CreateClient(_token))
+                using (var client = CreateClient(Token))
                 {
-                    var response = client.PostAsync(_appPath + getUserInfoPath, null).Result;
+                    var response = client.PostAsync(AppPath + getUserInfoPath, null).Result;
                     var result = response.Content.ReadAsStringAsync().Result;
                     return JsonConvert.DeserializeObject<UserClientModel>(result);
                 }

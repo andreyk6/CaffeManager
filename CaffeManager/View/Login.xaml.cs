@@ -26,23 +26,23 @@ namespace CaffeManager.View
     /// </summary>
     public partial class Login : Page
     {
-        public LoginModel LoginModel { get; set; }
+        public LoginModel Model { get; set; }
          
         public Login()
         {
             InitializeComponent();
-            LoginModel = new LoginModel() {
-                Login = "Enter Login or Email",
-                Password = "Enter Password"
+            Model = new LoginModel() {
+                Login = "manager1",
+                Password = "password"
             };
-            DataContext = LoginModel;
+            DataContext = Model;
         }
 
         private void Signin_Click(object sender, RoutedEventArgs e)
         {
             WebApiClient client;
             try {
-                client = new WebApiClient(@"http://localhost:58156", LoginModel.Login, LoginModel.Password);
+                client = new WebApiClient(@"http://localhost:58156", Model.Login, Model.Password);
             }
             catch(Exception exc)
             {
@@ -55,7 +55,7 @@ namespace CaffeManager.View
 
             if (userData.Role == UserRoles.Manager.ToString())
             {
-                NavigationService.Navigate(new ManagerMainPage());
+                NavigationService.Navigate(new ManagerMainPage(client));
             }
             if (userData.Role == UserRoles.Cashier.ToString())
             {

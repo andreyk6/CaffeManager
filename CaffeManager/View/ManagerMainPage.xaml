@@ -12,9 +12,12 @@
         <DockPanel DockPanel.Dock="Left">
             <Label DockPanel.Dock="Top" Content="Your cashiers"/>
             <Button DockPanel.Dock="Bottom" Name="AddCashier" Content="Add cashier"></Button>
-            <ListView DockPanel.Dock="Bottom" Name="Cashiers">
-                <CheckBox Content="Cashier0"/>
-                <CheckBox Content="Cashier1"/>
+            <ListView Name="CashiersListBox" SelectionChanged="CashiersListBox_SelectionChanged"  DockPanel.Dock="Bottom" ItemsSource="{Binding Path=Cashiers}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding Name}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListView>
         </DockPanel>
         <Border Width="1" Margin="2" Background="#8888"/>
@@ -33,22 +36,17 @@
             <!-- Stats -->
         </StackPanel>
         <StackPanel>
-            <Label Content="Cashiers statistics:" />
-            <chart:PieChart Width="500" Height="250"
-        ChartTitle="Minimal Pie Chart"
-        ChartSubTitle="Chart with fixed width and height"
-        SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}" >
-                <chart:PieChart.Series>
+            <chart:ClusteredColumnChart 
+        ChartTitle="Cashier statistics" ChartSubTitle="">
+                <chart:ClusteredColumnChart.Series>
                     <chart:ChartSeries
-                SeriesTitle="Errors"
-                DisplayMember="Category"
-                ValueMember="Number"
-                ItemsSource="{Binding Path=Errors}" />
-                </chart:PieChart.Series>
-            </chart:PieChart>
+                SeriesTitle="Sales"
+                DisplayMember="DateTime"
+                ValueMember="TotalPrice"
+                ItemsSource="{Binding Path=CashierOrders}" />
+                </chart:ClusteredColumnChart.Series>
+            </chart:ClusteredColumnChart>
             <!-- Stats -->
         </StackPanel>
-        
-
     </DockPanel>
 </Page>
