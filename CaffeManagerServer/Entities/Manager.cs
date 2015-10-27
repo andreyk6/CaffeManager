@@ -1,9 +1,10 @@
-﻿using System;
+﻿using CaffeManagerLib.SharedModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace CafeManagerLib.ModelShared
+namespace CaffeManagerServer.Enitites
 {
     public class Manager : User
     {

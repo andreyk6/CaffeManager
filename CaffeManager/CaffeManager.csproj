@@ -168,12 +168,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CafeManagerLib\CafeManagerLib.csproj">
-      <Project>{ef767aac-f277-48e4-a955-fdaf2a5914d4}</Project>
-      <Name>CafeManagerLib</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +183,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extension\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CafeManagerLib\CafeManagerLib.csproj">
+      <Project>{ef767aac-f277-48e4-a955-fdaf2a5914d4}</Project>
+      <Name>CafeManagerLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

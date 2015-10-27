@@ -4,7 +4,7 @@ using System;
 using System.Security.Claims;
 using CaffeManagerServer.Context;
 using System.Linq;
-using CafeManagerLib.ModelShared;
+using CaffeManagerServer.Enitites;
 
 namespace CaffeManagerServer
 {

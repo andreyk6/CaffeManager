@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 // Original file name:
-// Generation date: 19.10.2015 18:49:07
+// Generation date: 26.10.2015 16:09:08
 namespace CaffeManager.CafeManagerServiceReference
 {
     

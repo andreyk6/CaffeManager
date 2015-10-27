@@ -1,4 +1,4 @@
-﻿using CafeManagerLib.Client;
+﻿using CafeManagerLib.SharedModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

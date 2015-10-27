@@ -3,7 +3,8 @@
     using System.Data.Entity;
     using System.Collections.Generic;
     using System.Linq;
-    using CafeManagerLib.ModelShared;
+    using CaffeManagerServer.Enitites;
+    using CafeManagerLib.SharedModels;
 
     public class CaffeDbContext : DbContext
     {
@@ -12,7 +13,8 @@
         public DbSet<MenuItem> MenuItems { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
-        
+
+        public DbSet<CashierDayStatsModel> zComplexType_CashierDayStatsModel { get; set; }
 
         public User GetUserByName(string userName)
         {
@@ -74,7 +76,7 @@
 
             var order2 = new Order();
             order2.OrderItems = new List<OrderItem>();
-            order2.DateTime = new System.DateTime(2012, 12, 22);
+            order2.DateTime = new System.DateTime(2012, 12, 21);
             cashier1.Orders.Add(order2);
 
             var order3 = new Order();
@@ -95,17 +97,20 @@
 
             var orderItem1 = new OrderItem(menuItem1) { Count = 10 };
             order1.OrderItems.Add(orderItem1);
+            order1.CloseOrder();
             var orderItem2 = new OrderItem(menuItem2) { Count = 10 };
             order2.OrderItems.Add(orderItem2);
+            order2.CloseOrder();
             var orderItem3 = new OrderItem(menuItem3) { Count = 5 };
             order3.OrderItems.Add(orderItem3);
+            order3.CloseOrder();
             var orderItem4 = new OrderItem(menuItem4) { Count = 20 };
             order4.OrderItems.Add(orderItem4);
+            order4.CloseOrder();
             var orderItem5 = new OrderItem(menuItem5) { Count = 10 };
             order5.OrderItems.Add(orderItem5);
-
-
-
+            order5.CloseOrder();
+            
 
             context.MenuItems.Add(menuItem1);
             context.MenuItems.Add(menuItem2);

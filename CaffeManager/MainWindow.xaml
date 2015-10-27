@@ -1,5 +1,5 @@
 ﻿<NavigationWindow x:Class="CaffeManager.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" SizeToContent="WidthAndHeight" ShowsNavigationUI="False" ResizeMode="CanResize">
+        Title="CafeManager" SizeToContent="WidthAndHeight" ShowsNavigationUI="False" ResizeMode="CanResize">
 </NavigationWindow>

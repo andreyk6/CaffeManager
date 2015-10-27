@@ -1,5 +1,4 @@
-﻿using CafeManagerLib.Client;
-using CafeManagerLib.ModelShared;
+﻿using CaffeManagerServer.Enitites;
 using CaffeManagerServer.Context;
 using System;
 using System.Collections.Generic;
@@ -7,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using CafeManagerLib.SharedModels;
 
 namespace CaffeManagerServer.Controller
 {
@@ -19,8 +19,20 @@ namespace CaffeManagerServer.Controller
         [HttpPost]
         public UserClientModel Info()
         {
-            User user = _db.GetUserByName(User.Identity.Name);
-            return new UserClientModel(user, Request.Headers.Authorization.Parameter);
+            try {
+                User user = _db.GetUserByName(User.Identity.Name);
+                return new UserClientModel()
+                {
+                    Login = user.Login,
+                    Name = user.Name,
+                    Role = user.Role,
+                    Token = Request.Headers.Authorization.Parameter
+                };
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
     }
 }

@@ -13,12 +13,12 @@
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="White" Offset="0.912"/>
-                    <GradientStop Color="#FF00DCFF"/>
+                    <GradientStop Color="#FFFFAE00"/>
                 </LinearGradientBrush>
             </Grid.Background>
-            <Label Margin="0,10,0,0"  HorizontalAlignment="Center" Content="CafeManager" FontSize="40" FontFamily="Segoe UI Semibold" Background="#00000000" Foreground="Black">
+            <Label Margin="0,10,0,0"  HorizontalAlignment="Center" Content="CafeManager" FontSize="40" FontFamily="Segoe UI Semibold" Background="{x:Null}" Foreground="Black">
                 <Label.Effect>
-                    <DropShadowEffect Color="#FF12D4CC"/>
+                    <DropShadowEffect Color="#FFF0CF3C"/>
                 </Label.Effect>
             </Label>
         </Grid>
@@ -29,7 +29,7 @@
             </DockPanel>
             <DockPanel Margin="0,5">
                 <Label DockPanel.Dock="Left" Content="Password: "/>
-                <TextBox Name="userPassword" Text="{Binding Path=Password}"/>
+                <PasswordBox Name="userPassword" PasswordChar="*"/>
             </DockPanel>
             <Button Name="Signin" Width="100" HorizontalAlignment="Right" Margin="0,5" Content="Sign In" Click="Signin_Click"/>
         </StackPanel>

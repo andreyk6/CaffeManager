@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace CafeManagerLib.ModelShared
+namespace CaffeManagerServer.Enitites
 {
     public class Order
     {
@@ -17,16 +17,18 @@ namespace CafeManagerLib.ModelShared
 
         public decimal TotalPrice
         {
-            get
+            get;
+            set;
+        }
+
+        public void CloseOrder()
+        {
+            decimal total = 0;
+            foreach (var orderItem in OrderItems)
             {
-                decimal total = 0;
-                foreach (var orderItem in OrderItems)
-                {
-                    total += orderItem.TotalPrice;
-                }
-                return total;
+                total += orderItem.TotalPrice;
             }
-            private set { }
+            TotalPrice = total;
         }
 
         public DateTime Date

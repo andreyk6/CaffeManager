@@ -1,6 +1,5 @@
-﻿using CafeManagerLib.Client;
-using CafeManagerLib.ModelShared;
-using CaffeManager.Model;
+﻿using CaffeManager.Model;
+using CaffeManagerLib.SharedModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -36,10 +35,14 @@ namespace CaffeManager.View
                 Password = "password"
             };
             DataContext = Model;
+
+            userPassword.Password = Model.Password;
         }
 
         private void Signin_Click(object sender, RoutedEventArgs e)
         {
+            Model.Password = userPassword.Password;
+
             WebApiClient client;
             try {
                 client = new WebApiClient(@"http://localhost:58156", Model.Login, Model.Password);
@@ -49,7 +52,6 @@ namespace CaffeManager.View
                 MessageBox.Show(exc.Message);
                 return;
             }
-
 
             var userData = client.GetUserInfo();
 

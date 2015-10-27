@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CafeManagerLib.SharedModels
+{
+    public abstract class CashierStatsModel
+    {
+        public int Id { get; set; }
+        public decimal Amount
+        {
+            get; set;
+        }
+
+        public DateTime Date { get; set; }
+
+        public string TimeCaption
+        {
+            get
+            {
+                return DateTimeToString(Date);
+            }
+        }
+
+        public abstract string DateTimeToString(DateTime dt);
+    }
+}

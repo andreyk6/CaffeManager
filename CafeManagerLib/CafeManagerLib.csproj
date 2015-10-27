@@ -47,19 +47,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\UserClientModel.cs" />
-    <Compile Include="ModelShared\Cashier.cs" />
-    <Compile Include="ModelShared\Manager.cs" />
-    <Compile Include="ModelShared\MenuItem.cs" />
-    <Compile Include="ModelShared\Order.cs" />
-    <Compile Include="ModelShared\OrderItem.cs" />
-    <Compile Include="ModelShared\User.cs" />
-    <Compile Include="ModelShared\UserRoles.cs" />
+    <Compile Include="SharedModels\CashierYearStatsModel.cs" />
+    <Compile Include="SharedModels\CashierMonthStatsModel.cs" />
+    <Compile Include="SharedModels\CashierDayStatsModel.cs" />
+    <Compile Include="SharedModels\CashierStatsModel.cs" />
+    <Compile Include="SharedModels\UserClientModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SharedModels\UserRoles.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Server\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
