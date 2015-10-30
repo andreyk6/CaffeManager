@@ -9,44 +9,47 @@
       Title="CashierMainPage">
 
     <Grid>
-        <TabControl>
-            <TabItem Header="Menu">
-                <DockPanel>
-                    <DockPanel DockPanel.Dock="Bottom">
-                        <Button DockPanel.Dock="Right" Width="70" Content="Add" Click="Button_Click"/>
-                        <TextBox Name="tb_count" Text="0"/>
-                    </DockPanel>
-                    <ListView Name="menuList" ItemsSource="{Binding Menu}" SelectionChanged="ListView_SelectionChanged">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Column="0">
+            <Label DockPanel.Dock="Top" Content="Menu"/>
+            <DockPanel DockPanel.Dock="Bottom">
+                <Button DockPanel.Dock="Right" Width="70" Content="Add" Click="Button_Click"/>
+                <TextBox Name="tb_count" Text="0"/>
+            </DockPanel>
+            <ListView Name="menuList" ItemsSource="{Binding Menu}" SelectionChanged="ListView_SelectionChanged">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Label Content="{Binding Name}" FontWeight="Bold" FontSize="18.667"/>
+                            <Label Content="{Binding Description}" FontSize="13.333"/>
+                            <Label Content="{Binding Price}" FontWeight="Bold" FontSize="18.667" HorizontalAlignment="Right"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </DockPanel>
+        <DockPanel Grid.Column="1">
+            <Label DockPanel.Dock="Top" Content="Order"/>
+            <Button DockPanel.Dock="Bottom" Click="Button_Click_1" Height="20" Content="Check Out"></Button>
+            <ScrollViewer>
+                <ListView Name="currOrd" ItemsSource="{Binding CurrentOrder}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel>
-                                <Label Content="{Binding Name}" FontWeight="Bold" FontSize="18.667"/>
-                                <Label Content="{Binding Description}" FontSize="13.333"/>
-                                <Label Content="{Binding Price}" FontWeight="Bold" FontSize="18.667" HorizontalAlignment="Right"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding MenuItem.Name}" FontWeight="Bold" FontSize="18.667"/>
+                                <Label Content="{Binding TotalPrice}" FontWeight="Bold" FontSize="18.667" HorizontalAlignment="Right"/>
+                                <Button VerticalContentAlignment="Stretch" Content="X" Height="20px" Width="35" />
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                </DockPanel>
-            </TabItem>
-            <TabItem Header="Order">
-                <DockPanel>
-                    <Button DockPanel.Dock="Bottom" Click="Button_Click_1" Height="20" Content="Check Out"></Button>
-                    <ScrollViewer>
-                        <ListView ItemsSource="{Binding CurrentOrder}">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Label Content="{Binding MenuItem.Name}" FontWeight="Bold" FontSize="18.667"/>
-                                        <Label Content="{Binding TotalPrice}" FontWeight="Bold" FontSize="18.667" HorizontalAlignment="Right"/>
-                                        <Button Content="X"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </ScrollViewer>
-                </DockPanel>
-            </TabItem>
-        </TabControl>
+            </ScrollViewer>
+        </DockPanel>
     </Grid>
 </Page>

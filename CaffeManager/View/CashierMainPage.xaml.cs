@@ -2,6 +2,7 @@
 using CaffeManager.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,7 +49,6 @@ namespace CaffeManager.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
             decimal count;
             try
             {
@@ -59,6 +59,8 @@ namespace CaffeManager.View
                 count = 1;
             }
             _model.AddNewItemToCurrentOrder(menuList.SelectedIndex, count);
+            ICollectionView view = CollectionViewSource.GetDefaultView(currOrd.ItemsSource);
+            view.Refresh();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

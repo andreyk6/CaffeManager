@@ -75,9 +75,8 @@ namespace CaffeManager.Model
             if (HaveCurrentOrder())
             {
                 CurrentOrder.Add(new OrderItem() { MenuItem = Menu[index], Count = count, TotalPrice = count*Menu[index].Price });
-
             }
-            OnPropertyChanged("CurrentOrder");
+           // OnPropertyChanged("CurrentOrder");
         }
 
         public void RemoveItemFromCurrentOreder(MenuItem item)
