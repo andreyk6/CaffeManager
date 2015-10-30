@@ -12,7 +12,7 @@
     <DockPanel>
         <DockPanel DockPanel.Dock="Left">
             <Label DockPanel.Dock="Top" Content="Your cashiers"/>
-            <Button DockPanel.Dock="Bottom" Click="AddCashier_Click" x:Name="AddCashier" Content="Add cashier"/>
+            <Button DockPanel.Dock="Bottom" Click="AddCashier_Click" x:Name="AddCashier" Height="30" Content="Add cashier"/>
             <ListView x:Name="CashiersListBox" SelectionChanged="CashiersListBox_SelectionChanged"  DockPanel.Dock="Bottom" ItemsSource="{Binding Cashiers}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -55,7 +55,7 @@
 						ItemsSource="{Binding CashierStats}" />
                 </chart:ClusteredColumnChart.Series>
             </chart:ClusteredColumnChart>
-            <!-- Stats -->
+            <Label Content="{Binding InfoMessage}" Margin="2" Background="LightGray" FontSize="14"/>
         </StackPanel>
     </DockPanel>
 </Page>
