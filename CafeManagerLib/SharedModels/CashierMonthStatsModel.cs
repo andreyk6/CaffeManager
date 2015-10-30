@@ -10,7 +10,7 @@ namespace CafeManagerLib.SharedModels
     {
         public override string DateTimeToString(DateTime dt)
         {
-            return dt.ToString("0:yy/mm");
+            return dt.ToString("0:yyyy/mm");
         }
     }
 }

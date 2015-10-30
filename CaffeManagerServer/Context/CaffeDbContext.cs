@@ -14,7 +14,10 @@
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
 
-        public DbSet<CashierDayStatsModel> zComplexType_CashierDayStatsModel { get; set; }
+        private DbSet<CashierStatsModel> zComplexType_CashierStatsModel { get; set; }
+        private DbSet<CashierDayStatsModel> zComplexType_CashierDayStatsModel { get; set; }
+        private DbSet<CashierMonthStatsModel> zComplexType_CashierMonthStatsModel { get; set; }
+        private DbSet<CashierYearStatsModel> zComplexType_CashierYearStatsModel { get; set; }
 
         public User GetUserByName(string userName)
         {
@@ -64,7 +67,7 @@
             var menuItem1 = new MenuItem() { Name = "Soup", Price = 100 };
             var menuItem2 = new MenuItem() { Name = "Soup2", Price = 200 };
             var menuItem3 = new MenuItem() { Name = "Soup3", Price = 300 };
-            var menuItem4 = new MenuItem() { Name = "Soup4", Price = 50 };
+            var menuItem4 = new MenuItem() { Name = "Soup4", Price = 500 };
             var menuItem5 = new MenuItem() { Name = "Soup5", Price = 50 };
             
 

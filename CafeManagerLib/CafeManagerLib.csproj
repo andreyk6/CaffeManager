@@ -51,6 +51,7 @@
     <Compile Include="SharedModels\CashierMonthStatsModel.cs" />
     <Compile Include="SharedModels\CashierDayStatsModel.cs" />
     <Compile Include="SharedModels\CashierStatsModel.cs" />
+    <Compile Include="SharedModels\StatsPeriod.cs" />
     <Compile Include="SharedModels\UserClientModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SharedModels\UserRoles.cs" />

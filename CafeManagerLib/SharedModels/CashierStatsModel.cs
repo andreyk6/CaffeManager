@@ -9,20 +9,9 @@ namespace CafeManagerLib.SharedModels
     public abstract class CashierStatsModel
     {
         public int Id { get; set; }
-        public decimal Amount
-        {
-            get; set;
-        }
+        public decimal Amount { get; set; }
 
-        public DateTime Date { get; set; }
-
-        public string TimeCaption
-        {
-            get
-            {
-                return DateTimeToString(Date);
-            }
-        }
+        public string TimeCaption { get; set; }
 
         public abstract string DateTimeToString(DateTime dt);
     }
