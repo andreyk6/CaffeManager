@@ -47,6 +47,7 @@
     </Reference>
     <Reference Include="Microsoft.Data.Edm, Version=5.6.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Data.OData, Version=5.6.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Data.Services, Version=5.6.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Data.Services.Client, Version=5.6.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -80,9 +81,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+<<<<<<< HEAD
+    <Compile Include="Model\CashierPageModel.cs" />
+=======
     <Compile Include="Contexts\CaffeDataContext.cs" />
     <Compile Include="Extension\CaffeDataServiceExtension.cs" />
-    <Compile Include="Model\CashierPageModel.cs" />
+>>>>>>> e7689ff1ecc32141efe00322316d1e361098ed29
     <Compile Include="Model\ManagerMainPageModel.cs" />
     <Compile Include="Service References\CafeManagerServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -92,7 +96,6 @@
     <Compile Include="View\CashierAddWindow.xaml.cs">
       <DependentUpon>CashierAddWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CashierMainPage.xaml.cs" />
     <Compile Include="WebApiClient.cs" />
     <Resource Include="Generic.xaml">
       <SubType>Designer</SubType>
@@ -103,8 +106,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CashierMainPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Login.xaml">
       <SubType>Designer</SubType>
@@ -117,6 +120,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\CashierMainPage.xaml.cs">
+      <DependentUpon>CashierMainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -152,9 +158,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -164,6 +168,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CafeManagerLib\CafeManagerLib.csproj">
+      <Project>{ef767aac-f277-48e4-a955-fdaf2a5914d4}</Project>
+      <Name>CafeManagerLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -179,12 +189,17 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+<<<<<<< HEAD
+  <ItemGroup>
+    <Folder Include="Extension\" />
+=======
   <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CafeManagerLib\CafeManagerLib.csproj">
       <Project>{ef767aac-f277-48e4-a955-fdaf2a5914d4}</Project>
       <Name>CafeManagerLib</Name>
     </ProjectReference>
+>>>>>>> e7689ff1ecc32141efe00322316d1e361098ed29
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

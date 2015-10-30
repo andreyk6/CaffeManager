@@ -1,6 +1,12 @@
+<<<<<<< HEAD
+﻿using CafeManagerLib.Client;
+using CafeManagerLib.ModelShared;
+using CaffeManager.Model;
+=======
 ﻿using CaffeManager.Contexts;
 using CaffeManager.Model;
 using CaffeManagerLib.SharedModels;
+>>>>>>> e7689ff1ecc32141efe00322316d1e361098ed29
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -27,7 +33,7 @@ namespace CaffeManager.View
     public partial class Login : Page
     {
         public LoginModel Model { get; set; }
-
+         
         public Login()
         {
             InitializeComponent();
@@ -36,52 +42,50 @@ namespace CaffeManager.View
                 Password = "password"
             };
             DataContext = Model;
-
-            userPassword.Password = Model.Password;
         }
 
-        private async void Signin_Click(object sender, RoutedEventArgs e)
+        private void Signin_Click(object sender, RoutedEventArgs e)
         {
-            LoginProgressBar.Visibility = Visibility.Visible;
-            await LoginAsync();
-            LoginProgressBar.Visibility = Visibility.Collapsed;
-        }
+<<<<<<< HEAD
+=======
+            //Pass password from View to Model
+            Model.Password = userPassword.Password;
 
-        private Task LoginAsync()
-        {
-            return Task.Factory.StartNew(() => {
-                //Pass password from View to Model
-                Model.Password = userPassword.Password;
+            //Try to signin
+>>>>>>> e7689ff1ecc32141efe00322316d1e361098ed29
+            WebApiClient client;
+            try
+            {
+                client = new WebApiClient(@"http://localhost:58156", Model.Login, Model.Password);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+                return;
+            }
 
-                //Try to signin
-                WebApiClient client;
-                try
-                {
-                    client = new WebApiClient(@"http://localhost:58156", Model.Login, Model.Password);
-                }
-                catch (Exception exc)
-                {
-                    MessageBox.Show(exc.Message);
-                    return;
-                }
+<<<<<<< HEAD
 
-                //Initialize DataContext with Url and Access token
-                CaffeDataContext.InitializeContext(@"http://localhost:58156/CaffeDataService.svc", client.Token);
-                this.Dispatcher.Invoke(() => NavigateNextPage(client));
-            });
+            var userData = client.GetUserInfo();
+=======
+            //Initialize DataContext with Url and Access token
+            CaffeDataContext.InitializeContext(@"http://localhost:58156/CaffeDataService.svc", client.Token);
+
+            NavigateNextPage(client);
         }
 
         private void NavigateNextPage(WebApiClient client)
         {
             var userModel = client.GetUserInfo();
+>>>>>>> e7689ff1ecc32141efe00322316d1e361098ed29
 
             if (userModel.Role == UserRoles.Manager.ToString())
             {
-                NavigationService.Navigate(new ManagerMainPage(userModel));
+                NavigationService.Navigate(userModel);
             }
             if (userModel.Role == UserRoles.Cashier.ToString())
             {
-                NavigationService.Navigate(new CashierMainPage(userModel));
+                NavigationService.Navigate(new CashierMainPage());
             }
         }
 

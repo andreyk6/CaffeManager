@@ -1,4 +1,5 @@
 ﻿using CaffeManager.CafeManagerServiceReference;
+using CaffeManager.Contexts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -50,8 +51,8 @@ namespace CaffeManager.Model
             }
         }
 
-        private IEnumerable<MenuItem> _menu;
-        public IEnumerable<MenuItem> Menu
+        private List<MenuItem> _menu;
+        public List<MenuItem> Menu
         {
             get
             {
@@ -69,22 +70,13 @@ namespace CaffeManager.Model
             }
         }
 
-        public void AddNewItemToCurrentOrder(MenuItem newItem, decimal count)
+        public void AddNewItemToCurrentOrder(int index, decimal count)
         {
             if (HaveCurrentOrder())
             {
-                CurrentOrder.Add(new OrderItem(){ MenuItem = newItem, Count = count });
+                CurrentOrder.Add(new OrderItem() { MenuItem = Menu[index], Count = count, TotalPrice = count*Menu[index].Price });
+
             }
-            foreach (var item in CurrentOrder)
-            {
-                if (item.Id == newItem.Id)
-                {
-                    item.Count += count;
-                    OnPropertyChanged("CurrentOrder");
-                    return;
-                }
-            }
-            CurrentOrder.Add(new OrderItem(){ MenuItem = newItem, Count = count });
             OnPropertyChanged("CurrentOrder");
         }
 
@@ -116,10 +108,58 @@ namespace CaffeManager.Model
         private CaffeDbContext _context;
         public CashierPageModel()
         {
-           // _context = CaffeDbContext.Instance;
-            Menu = _context.MenuItems.Execute();
+           _context = CaffeDataContext.Instance;
+            Menu = _context.MenuItems.ToList();
             CurrentOrder = new List<OrderItem>();
         }
+
+        public void Save()
+        {
+            //Get cashier
+            var cashier = (from c in _context.Cashiers.Expand("Orders")
+                          where c.Name == Name
+                          select c).Single();
+            _context.LoadProperty(cashier, "Orders");
+
+
+            //Create and add Empty order to cashier
+            decimal totalPrice = GetTotalPrice(CurrentOrder);
+            var currentDateTime = DateTime.Now;
+            var order = Order.CreateOrder(0, currentDateTime, cashier.Id, totalPrice, DateTime.Now.Date);
+            _context.AddRelatedObject(cashier, "Orders", order);
+            _context.SetLink(order, "Cashier", cashier);
+            cashier.Orders.Add(order);
+            order.Cashier = cashier;
+            
+            //Save changes
+            _context.SaveChanges();
+
+            //Get order from db (for id)
+
+            _context.LoadProperty(order, "OrderItems");
+
+            foreach(var orderItem in CurrentOrder)
+            {
+                var orderItm = OrderItem.CreateOrderItem(0, orderItem.Count, orderItem.MenuItemId, order.Id, orderItem.TotalPrice);
+                _context.AddRelatedObject(order, "OrderItems", orderItm);
+                _context.SetLink(orderItm, "Order", order);
+                order.OrderItems.Add(orderItm);
+                orderItem.Order = order;
+            }
+
+            _context.SaveChanges();
+        }
+
+        private decimal GetTotalPrice(List<OrderItem> currentOrder)
+        {
+            decimal totalPrice = 0;
+            foreach (var orderItem in currentOrder)
+            {
+                totalPrice += orderItem.TotalPrice;
+            }
+            return totalPrice;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
         {
