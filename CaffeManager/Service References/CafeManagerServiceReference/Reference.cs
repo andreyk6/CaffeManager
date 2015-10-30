@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 // Original file name:
-// Generation date: 26.10.2015 16:09:08
+// Generation date: 30.10.2015 15:49:31
 namespace CaffeManager.CafeManagerServiceReference
 {
     
@@ -56,7 +56,7 @@ namespace CaffeManager.CafeManagerServiceReference
             {
                 return string.Concat("CaffeManagerServer.Context.", clientType.Name);
             }
-            return null;
+            return clientType.FullName;
         }
         /// <summary>
         /// There are no comments for Cashiers in the schema.
@@ -144,6 +144,23 @@ namespace CaffeManager.CafeManagerServiceReference
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         private global::System.Data.Services.Client.DataServiceQuery<MenuItem> _MenuItems;
         /// <summary>
+        /// There are no comments for zComplexType_CashierStatsModel in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public global::System.Data.Services.Client.DataServiceQuery<CashierStatsModel> zComplexType_CashierStatsModel
+        {
+            get
+            {
+                if ((this._zComplexType_CashierStatsModel == null))
+                {
+                    this._zComplexType_CashierStatsModel = base.CreateQuery<CashierStatsModel>("zComplexType_CashierStatsModel");
+                }
+                return this._zComplexType_CashierStatsModel;
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private global::System.Data.Services.Client.DataServiceQuery<CashierStatsModel> _zComplexType_CashierStatsModel;
+        /// <summary>
         /// There are no comments for Cashiers in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -182,6 +199,14 @@ namespace CaffeManager.CafeManagerServiceReference
         public void AddToMenuItems(MenuItem menuItem)
         {
             base.AddObject("MenuItems", menuItem);
+        }
+        /// <summary>
+        /// There are no comments for zComplexType_CashierStatsModel in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public void AddTozComplexType_CashierStatsModel(CashierStatsModel cashierStatsModel)
+        {
+            base.AddObject("zComplexType_CashierStatsModel", cashierStatsModel);
         }
     }
     /// <summary>
@@ -1038,6 +1063,162 @@ namespace CaffeManager.CafeManagerServiceReference
             {
                 this.PropertyChanged(this, new global::System.ComponentModel.PropertyChangedEventArgs(property));
             }
+        }
+    }
+    /// <summary>
+    /// There are no comments for CaffeManagerServer.Context.CashierStatsModel in the schema.
+    /// </summary>
+    /// <KeyProperties>
+    /// Id
+    /// </KeyProperties>
+    [global::System.Data.Services.Common.EntitySetAttribute("zComplexType_CashierStatsModel")]
+    [global::System.Data.Services.Common.DataServiceKeyAttribute("Id")]
+    public abstract partial class CashierStatsModel : global::System.ComponentModel.INotifyPropertyChanged
+    {
+        /// <summary>
+        /// There are no comments for Property Id in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public int Id
+        {
+            get
+            {
+                return this._Id;
+            }
+            set
+            {
+                this.OnIdChanging(value);
+                this._Id = value;
+                this.OnIdChanged();
+                this.OnPropertyChanged("Id");
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private int _Id;
+        partial void OnIdChanging(int value);
+        partial void OnIdChanged();
+        /// <summary>
+        /// There are no comments for Property Amount in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public decimal Amount
+        {
+            get
+            {
+                return this._Amount;
+            }
+            set
+            {
+                this.OnAmountChanging(value);
+                this._Amount = value;
+                this.OnAmountChanged();
+                this.OnPropertyChanged("Amount");
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private decimal _Amount;
+        partial void OnAmountChanging(decimal value);
+        partial void OnAmountChanged();
+        /// <summary>
+        /// There are no comments for Property TimeCaption in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public string TimeCaption
+        {
+            get
+            {
+                return this._TimeCaption;
+            }
+            set
+            {
+                this.OnTimeCaptionChanging(value);
+                this._TimeCaption = value;
+                this.OnTimeCaptionChanged();
+                this.OnPropertyChanged("TimeCaption");
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private string _TimeCaption;
+        partial void OnTimeCaptionChanging(string value);
+        partial void OnTimeCaptionChanged();
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public event global::System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        protected virtual void OnPropertyChanged(string property)
+        {
+            if ((this.PropertyChanged != null))
+            {
+                this.PropertyChanged(this, new global::System.ComponentModel.PropertyChangedEventArgs(property));
+            }
+        }
+    }
+    /// <summary>
+    /// There are no comments for CaffeManagerServer.Context.CashierYearStatsModel in the schema.
+    /// </summary>
+    /// <KeyProperties>
+    /// Id
+    /// </KeyProperties>
+    [global::System.Data.Services.Common.DataServiceKeyAttribute("Id")]
+    public partial class CashierYearStatsModel : CashierStatsModel
+    {
+        /// <summary>
+        /// Create a new CashierYearStatsModel object.
+        /// </summary>
+        /// <param name="ID">Initial value of Id.</param>
+        /// <param name="amount">Initial value of Amount.</param>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public static CashierYearStatsModel CreateCashierYearStatsModel(int ID, decimal amount)
+        {
+            CashierYearStatsModel cashierYearStatsModel = new CashierYearStatsModel();
+            cashierYearStatsModel.Id = ID;
+            cashierYearStatsModel.Amount = amount;
+            return cashierYearStatsModel;
+        }
+    }
+    /// <summary>
+    /// There are no comments for CaffeManagerServer.Context.CashierMonthStatsModel in the schema.
+    /// </summary>
+    /// <KeyProperties>
+    /// Id
+    /// </KeyProperties>
+    [global::System.Data.Services.Common.DataServiceKeyAttribute("Id")]
+    public partial class CashierMonthStatsModel : CashierStatsModel
+    {
+        /// <summary>
+        /// Create a new CashierMonthStatsModel object.
+        /// </summary>
+        /// <param name="ID">Initial value of Id.</param>
+        /// <param name="amount">Initial value of Amount.</param>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public static CashierMonthStatsModel CreateCashierMonthStatsModel(int ID, decimal amount)
+        {
+            CashierMonthStatsModel cashierMonthStatsModel = new CashierMonthStatsModel();
+            cashierMonthStatsModel.Id = ID;
+            cashierMonthStatsModel.Amount = amount;
+            return cashierMonthStatsModel;
+        }
+    }
+    /// <summary>
+    /// There are no comments for CaffeManagerServer.Context.CashierDayStatsModel in the schema.
+    /// </summary>
+    /// <KeyProperties>
+    /// Id
+    /// </KeyProperties>
+    [global::System.Data.Services.Common.DataServiceKeyAttribute("Id")]
+    public partial class CashierDayStatsModel : CashierStatsModel
+    {
+        /// <summary>
+        /// Create a new CashierDayStatsModel object.
+        /// </summary>
+        /// <param name="ID">Initial value of Id.</param>
+        /// <param name="amount">Initial value of Amount.</param>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public static CashierDayStatsModel CreateCashierDayStatsModel(int ID, decimal amount)
+        {
+            CashierDayStatsModel cashierDayStatsModel = new CashierDayStatsModel();
+            cashierDayStatsModel.Id = ID;
+            cashierDayStatsModel.Amount = amount;
+            return cashierDayStatsModel;
         }
     }
 }

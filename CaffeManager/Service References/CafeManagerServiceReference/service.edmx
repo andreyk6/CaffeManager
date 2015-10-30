@@ -58,6 +58,17 @@
         <Property Name="Price" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="2" />
         <Property Name="Description" Type="Edm.String" MaxLength="Max" FixedLength="false" Unicode="true" />
       </EntityType>
+      <EntityType Name="CashierStatsModel" Abstract="true">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Int32" Nullable="false" p6:StoreGeneratedPattern="Identity" xmlns:p6="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+        <Property Name="Amount" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="2" />
+        <Property Name="TimeCaption" Type="Edm.String" MaxLength="Max" FixedLength="false" Unicode="true" />
+      </EntityType>
+      <EntityType Name="CashierYearStatsModel" BaseType="CaffeManagerServer.Context.CashierStatsModel" />
+      <EntityType Name="CashierMonthStatsModel" BaseType="CaffeManagerServer.Context.CashierStatsModel" />
+      <EntityType Name="CashierDayStatsModel" BaseType="CaffeManagerServer.Context.CashierStatsModel" />
       <Association Name="Manager_Cashiers">
         <End Type="CaffeManagerServer.Context.Manager" Role="Manager_Cashiers_Source" Multiplicity="1">
           <OnDelete Action="Cascade" />
@@ -120,6 +131,11 @@
         <EntitySet Name="Orders" EntityType="CaffeManagerServer.Context.Order" />
         <EntitySet Name="OrderItems" EntityType="CaffeManagerServer.Context.OrderItem" />
         <EntitySet Name="MenuItems" EntityType="CaffeManagerServer.Context.MenuItem" />
+        <EntitySet Name="zComplexType_CashierStatsModel" EntityType="CaffeManagerServer.Context.CashierStatsModel" />
+        <FunctionImport Name="GetCashierStats" ReturnType="Collection(CaffeManagerServer.Context.CashierStatsModel)" EntitySet="zComplexType_CashierStatsModel" m:HttpMethod="GET">
+          <Parameter Name="cashierId" Type="Edm.Int32" Nullable="false" />
+          <Parameter Name="statsPeriod" Type="Edm.Int32" Nullable="false" />
+        </FunctionImport>
         <AssociationSet Name="Manager_Cashiers" Association="CaffeManagerServer.Context.Manager_Cashiers">
           <End Role="Manager_Cashiers_Target" EntitySet="Cashiers" />
           <End Role="Manager_Cashiers_Source" EntitySet="Managers" />
