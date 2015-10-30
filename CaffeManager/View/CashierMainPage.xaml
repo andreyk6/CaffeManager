@@ -9,6 +9,45 @@
       Title="CashierMainPage">
 
     <Grid>
-        
+        <TabControl>
+            <TabItem Header="Menu">
+                <DockPanel>
+                    <DockPanel DockPanel.Dock="Bottom">
+                        <Button DockPanel.Dock="Right" Width="70" Content="Add"/>
+                        <TextBox Text="0"/>
+                    </DockPanel>
+                    <ListView ItemsSource="{Binding Menu}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Label Content="{Binding Name}" FontWeight="Bold" FontSize="18.667"/>
+                                <Label Content="{Binding Description}" FontSize="13.333"/>
+                                <Label Content="{Binding Price}" FontWeight="Bold" FontSize="18.667" HorizontalAlignment="Right"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Order">
+                <DockPanel>
+                    <Button DockPanel.Dock="Bottom" Height="20" Content="Check Out"></Button>
+                    <ScrollViewer>
+                        <ListView ItemsSource="{Binding CurrentOrder}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{Binding MenuItem.Name}" FontWeight="Bold" FontSize="18.667"/>
+                                        <TextBox Text="{Binding Count}" FontSize="13.333"/>
+                                        <Label Content="{Binding TotalPrice}" FontWeight="Bold" FontSize="18.667" HorizontalAlignment="Right"/>
+                                        <Button Content="X"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </ScrollViewer>
+                </DockPanel>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Page>

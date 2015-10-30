@@ -27,6 +27,7 @@ namespace CaffeManager.Contexts
             CaffeDbContext context = new CaffeDbContext(new Uri(appPath));
             context.SendingRequest += new EventHandler<SendingRequestEventArgs>(OnSendingRequest);
             context.MergeOption = System.Data.Services.Client.MergeOption.OverwriteChanges;
+            _instance = context;
         }
 
         private static void OnSendingRequest(object sender, SendingRequestEventArgs e)

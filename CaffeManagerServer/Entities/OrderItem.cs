@@ -29,6 +29,7 @@ namespace CaffeManagerServer.Enitites
         {
             MenuItem = new MenuItem();
         }
+
         public OrderItem(MenuItem menuItem)
         {
             MenuItem = menuItem;

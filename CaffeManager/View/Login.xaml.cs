@@ -69,7 +69,7 @@ namespace CaffeManager.View
 
             if (userModel.Role == UserRoles.Manager.ToString())
             {
-                NavigationService.Navigate(userModel);
+                NavigationService.Navigate(new ManagerMainPage(userModel));
             }
             if (userModel.Role == UserRoles.Cashier.ToString())
             {
