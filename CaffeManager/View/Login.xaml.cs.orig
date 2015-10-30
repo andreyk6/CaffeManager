@@ -1,6 +1,12 @@
+<<<<<<< HEAD
+﻿using CafeManagerLib.Client;
+using CafeManagerLib.ModelShared;
+using CaffeManager.Model;
+=======
 ﻿using CaffeManager.Contexts;
 using CaffeManager.Model;
 using CaffeManagerLib.SharedModels;
+>>>>>>> e7689ff1ecc32141efe00322316d1e361098ed29
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -36,16 +42,17 @@ namespace CaffeManager.View
                 Password = "password"
             };
             DataContext = Model;
-
-            userPassword.Password = Model.Password;
         }
 
         private void Signin_Click(object sender, RoutedEventArgs e)
         {
+<<<<<<< HEAD
+=======
             //Pass password from View to Model
             Model.Password = userPassword.Password;
 
             //Try to signin
+>>>>>>> e7689ff1ecc32141efe00322316d1e361098ed29
             WebApiClient client;
             try
             {
@@ -57,6 +64,10 @@ namespace CaffeManager.View
                 return;
             }
 
+<<<<<<< HEAD
+
+            var userData = client.GetUserInfo();
+=======
             //Initialize DataContext with Url and Access token
             CaffeDataContext.InitializeContext(@"http://localhost:58156/CaffeDataService.svc", client.Token);
 
@@ -66,14 +77,15 @@ namespace CaffeManager.View
         private void NavigateNextPage(WebApiClient client)
         {
             var userModel = client.GetUserInfo();
+>>>>>>> e7689ff1ecc32141efe00322316d1e361098ed29
 
             if (userModel.Role == UserRoles.Manager.ToString())
             {
-                NavigationService.Navigate(new ManagerMainPage(userModel));
+                NavigationService.Navigate(userModel);
             }
             if (userModel.Role == UserRoles.Cashier.ToString())
             {
-                NavigationService.Navigate(new CashierMainPage(userModel));
+                NavigationService.Navigate(new CashierMainPage());
             }
         }
 

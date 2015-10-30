@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CafeManagerLib.SharedModels;
+using CaffeManager.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,48 @@ namespace CaffeManager.View
     /// </summary>
     public partial class CashierMainPage : Page
     {
-        public CashierMainPage()
+        private CashierPageModel _model;
+        public CashierMainPage(UserClientModel userModel)
         {
             InitializeComponent();
+            _model = new CashierPageModel()
+            {
+                Name = userModel.Name
+            };
+            DataContext = _model;
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //decimal count;
+            //try {
+            //    count = decimal.Parse(tb_count.Text);
+            //        }
+            //catch(Exception ex)
+            //{
+            //    count = 1;
+            //}
+            //_model.AddNewItemToCurrentOrder(((ListView)sender).SelectedIndex, count);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            decimal count;
+            try
+            {
+                count = decimal.Parse(tb_count.Text);
+            }
+            catch (Exception ex)
+            {
+                count = 1;
+            }
+            _model.AddNewItemToCurrentOrder(menuList.SelectedIndex, count);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            _model.Save();
         }
     }
 }

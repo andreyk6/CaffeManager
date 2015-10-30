@@ -9,7 +9,11 @@
 //------------------------------------------------------------------------------
 
 // Original file name:
-// Generation date: 30.10.2015 20:48:48
+<<<<<<< HEAD
+// Generation date: 19.10.2015 18:49:07
+=======
+// Generation date: 30.10.2015 15:49:31
+>>>>>>> e7689ff1ecc32141efe00322316d1e361098ed29
 namespace CaffeManager.CafeManagerServiceReference
 {
     
@@ -28,7 +32,6 @@ namespace CaffeManager.CafeManagerServiceReference
             this.ResolveName = new global::System.Func<global::System.Type, string>(this.ResolveNameFromType);
             this.ResolveType = new global::System.Func<string, global::System.Type>(this.ResolveTypeFromName);
             this.OnContextCreated();
-            this.Format.LoadServiceModel = GeneratedEdmModel.GetInstance;
         }
         partial void OnContextCreated();
         /// <summary>
@@ -39,10 +42,9 @@ namespace CaffeManager.CafeManagerServiceReference
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         protected global::System.Type ResolveTypeFromName(string typeName)
         {
-            global::System.Type resolvedType = this.DefaultResolveType(typeName, "CaffeManagerServer.Context", "CaffeManager.CafeManagerServiceReference");
-            if ((resolvedType != null))
+            if (typeName.StartsWith("CaffeManagerServer.Context", global::System.StringComparison.Ordinal))
             {
-                return resolvedType;
+                return this.GetType().Assembly.GetType(string.Concat("CaffeManager.CafeManagerServiceReference", typeName.Substring(26)), false);
             }
             return null;
         }
@@ -209,138 +211,6 @@ namespace CaffeManager.CafeManagerServiceReference
         public void AddTozComplexType_CashierStatsModel(CashierStatsModel cashierStatsModel)
         {
             base.AddObject("zComplexType_CashierStatsModel", cashierStatsModel);
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        private abstract class GeneratedEdmModel
-        {
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-            private static global::Microsoft.Data.Edm.IEdmModel ParsedModel = LoadModelFromString();
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-            private const string ModelPart0 = "<edmx:Edmx Version=\"1.0\" xmlns:edmx=\"http://schemas.microsoft.com/ado/2007/06/edm" +
-                "x\"><edmx:DataServices m:DataServiceVersion=\"1.0\" m:MaxDataServiceVersion=\"3.0\" x" +
-                "mlns:m=\"http://schemas.microsoft.com/ado/2007/08/dataservices/metadata\"><Schema " +
-                "Namespace=\"CaffeManagerServer.Context\" xmlns=\"http://schemas.microsoft.com/ado/2" +
-                "009/11/edm\"><EntityType Name=\"Cashier\"><Key><PropertyRef Name=\"Id\" /></Key><Prop" +
-                "erty Name=\"Id\" Type=\"Edm.Int32\" Nullable=\"false\" p6:StoreGeneratedPattern=\"Ident" +
-                "ity\" xmlns:p6=\"http://schemas.microsoft.com/ado/2009/02/edm/annotation\" /><Prope" +
-                "rty Name=\"ManagerId\" Type=\"Edm.Int32\" Nullable=\"false\" /><Property Name=\"Name\" T" +
-                "ype=\"Edm.String\" MaxLength=\"Max\" FixedLength=\"false\" Unicode=\"true\" /><Property " +
-                "Name=\"Login\" Type=\"Edm.String\" MaxLength=\"Max\" FixedLength=\"false\" Unicode=\"true" +
-                "\" /><Property Name=\"Password\" Type=\"Edm.String\" MaxLength=\"Max\" FixedLength=\"fal" +
-                "se\" Unicode=\"true\" /><Property Name=\"Role\" Type=\"Edm.String\" MaxLength=\"Max\" Fix" +
-                "edLength=\"false\" Unicode=\"true\" /><NavigationProperty Name=\"Manager\" Relationshi" +
-                "p=\"CaffeManagerServer.Context.Manager_Cashiers\" ToRole=\"Manager_Cashiers_Source\"" +
-                " FromRole=\"Manager_Cashiers_Target\" /><NavigationProperty Name=\"Orders\" Relation" +
-                "ship=\"CaffeManagerServer.Context.Cashier_Orders\" ToRole=\"Cashier_Orders_Target\" " +
-                "FromRole=\"Cashier_Orders_Source\" /></EntityType><EntityType Name=\"Manager\"><Key>" +
-                "<PropertyRef Name=\"Id\" /></Key><Property Name=\"Id\" Type=\"Edm.Int32\" Nullable=\"fa" +
-                "lse\" p6:StoreGeneratedPattern=\"Identity\" xmlns:p6=\"http://schemas.microsoft.com/" +
-                "ado/2009/02/edm/annotation\" /><Property Name=\"Name\" Type=\"Edm.String\" MaxLength=" +
-                "\"Max\" FixedLength=\"false\" Unicode=\"true\" /><Property Name=\"Login\" Type=\"Edm.Stri" +
-                "ng\" MaxLength=\"Max\" FixedLength=\"false\" Unicode=\"true\" /><Property Name=\"Passwor" +
-                "d\" Type=\"Edm.String\" MaxLength=\"Max\" FixedLength=\"false\" Unicode=\"true\" /><Prope" +
-                "rty Name=\"Role\" Type=\"Edm.String\" MaxLength=\"Max\" FixedLength=\"false\" Unicode=\"t" +
-                "rue\" /><NavigationProperty Name=\"Cashiers\" Relationship=\"CaffeManagerServer.Cont" +
-                "ext.Manager_Cashiers\" ToRole=\"Manager_Cashiers_Target\" FromRole=\"Manager_Cashier" +
-                "s_Source\" /></EntityType><EntityType Name=\"Order\"><Key><PropertyRef Name=\"Id\" />" +
-                "</Key><Property Name=\"Id\" Type=\"Edm.Int32\" Nullable=\"false\" p6:StoreGeneratedPat" +
-                "tern=\"Identity\" xmlns:p6=\"http://schemas.microsoft.com/ado/2009/02/edm/annotatio" +
-                "n\" /><Property Name=\"DateTime\" Type=\"Edm.DateTime\" Nullable=\"false\" /><Property " +
-                "Name=\"CashierId\" Type=\"Edm.Int32\" Nullable=\"false\" /><Property Name=\"TotalPrice\"" +
-                " Type=\"Edm.Decimal\" Nullable=\"false\" Precision=\"18\" Scale=\"2\" /><Property Name=\"" +
-                "Date\" Type=\"Edm.DateTime\" Nullable=\"false\" /><NavigationProperty Name=\"Cashier\" " +
-                "Relationship=\"CaffeManagerServer.Context.Cashier_Orders\" ToRole=\"Cashier_Orders_" +
-                "Source\" FromRole=\"Cashier_Orders_Target\" /><NavigationProperty Name=\"OrderItems\"" +
-                " Relationship=\"CaffeManagerServer.Context.Order_OrderItems\" ToRole=\"Order_OrderI" +
-                "tems_Target\" FromRole=\"Order_OrderItems_Source\" /></EntityType><EntityType Name=" +
-                "\"OrderItem\"><Key><PropertyRef Name=\"Id\" /></Key><Property Name=\"Id\" Type=\"Edm.In" +
-                "t32\" Nullable=\"false\" p6:StoreGeneratedPattern=\"Identity\" xmlns:p6=\"http://schem" +
-                "as.microsoft.com/ado/2009/02/edm/annotation\" /><Property Name=\"Count\" Type=\"Edm." +
-                "Decimal\" Nullable=\"false\" Precision=\"18\" Scale=\"2\" /><Property Name=\"MenuItemId\"" +
-                " Type=\"Edm.Int32\" Nullable=\"false\" /><Property Name=\"OrderId\" Type=\"Edm.Int32\" N" +
-                "ullable=\"false\" /><Property Name=\"TotalPrice\" Type=\"Edm.Decimal\" Nullable=\"false" +
-                "\" Precision=\"18\" Scale=\"2\" /><NavigationProperty Name=\"MenuItem\" Relationship=\"C" +
-                "affeManagerServer.Context.OrderItem_MenuItem\" ToRole=\"OrderItem_MenuItem_Target\"" +
-                " FromRole=\"OrderItem_MenuItem_Source\" /><NavigationProperty Name=\"Order\" Relatio" +
-                "nship=\"CaffeManagerServer.Context.Order_OrderItems\" ToRole=\"Order_OrderItems_Sou" +
-                "rce\" FromRole=\"Order_OrderItems_Target\" /></EntityType><EntityType Name=\"MenuIte" +
-                "m\"><Key><PropertyRef Name=\"Id\" /></Key><Property Name=\"Id\" Type=\"Edm.Int32\" Null" +
-                "able=\"false\" p6:StoreGeneratedPattern=\"Identity\" xmlns:p6=\"http://schemas.micros" +
-                "oft.com/ado/2009/02/edm/annotation\" /><Property Name=\"Name\" Type=\"Edm.String\" Ma" +
-                "xLength=\"Max\" FixedLength=\"false\" Unicode=\"true\" /><Property Name=\"Price\" Type=\"" +
-                "Edm.Decimal\" Nullable=\"false\" Precision=\"18\" Scale=\"2\" /><Property Name=\"Descrip" +
-                "tion\" Type=\"Edm.String\" MaxLength=\"Max\" FixedLength=\"false\" Unicode=\"true\" /></E" +
-                "ntityType><EntityType Name=\"CashierStatsModel\" Abstract=\"true\"><Key><PropertyRef" +
-                " Name=\"Id\" /></Key><Property Name=\"Id\" Type=\"Edm.Int32\" Nullable=\"false\" p6:Stor" +
-                "eGeneratedPattern=\"Identity\" xmlns:p6=\"http://schemas.microsoft.com/ado/2009/02/" +
-                "edm/annotation\" /><Property Name=\"Amount\" Type=\"Edm.Decimal\" Nullable=\"false\" Pr" +
-                "ecision=\"18\" Scale=\"2\" /><Property Name=\"TimeCaption\" Type=\"Edm.String\" MaxLengt" +
-                "h=\"Max\" FixedLength=\"false\" Unicode=\"true\" /></EntityType><EntityType Name=\"Cash" +
-                "ierYearStatsModel\" BaseType=\"CaffeManagerServer.Context.CashierStatsModel\" /><En" +
-                "tityType Name=\"CashierMonthStatsModel\" BaseType=\"CaffeManagerServer.Context.Cash" +
-                "ierStatsModel\" /><EntityType Name=\"CashierDayStatsModel\" BaseType=\"CaffeManagerS" +
-                "erver.Context.CashierStatsModel\" /><Association Name=\"Manager_Cashiers\"><End Typ" +
-                "e=\"CaffeManagerServer.Context.Manager\" Role=\"Manager_Cashiers_Source\" Multiplici" +
-                "ty=\"1\"><OnDelete Action=\"Cascade\" /></End><End Type=\"CaffeManagerServer.Context." +
-                "Cashier\" Role=\"Manager_Cashiers_Target\" Multiplicity=\"*\" /><ReferentialConstrain" +
-                "t><Principal Role=\"Manager_Cashiers_Source\"><PropertyRef Name=\"Id\" /></Principal" +
-                "><Dependent Role=\"Manager_Cashiers_Target\"><PropertyRef Name=\"ManagerId\" /></Dep" +
-                "endent></ReferentialConstraint></Association><Association Name=\"Cashier_Orders\">" +
-                "<End Type=\"CaffeManagerServer.Context.Cashier\" Role=\"Cashier_Orders_Source\" Mult" +
-                "iplicity=\"1\"><OnDelete Action=\"Cascade\" /></End><End Type=\"CaffeManagerServer.Co" +
-                "ntext.Order\" Role=\"Cashier_Orders_Target\" Multiplicity=\"*\" /><ReferentialConstra" +
-                "int><Principal Role=\"Cashier_Orders_Source\"><PropertyRef Name=\"Id\" /></Principal" +
-                "><Dependent Role=\"Cashier_Orders_Target\"><PropertyRef Name=\"CashierId\" /></Depen" +
-                "dent></ReferentialConstraint></Association><Association Name=\"Order_OrderItems\">" +
-                "<End Type=\"CaffeManagerServer.Context.Order\" Role=\"Order_OrderItems_Source\" Mult" +
-                "iplicity=\"1\"><OnDelete Action=\"Cascade\" /></End><End Type=\"CaffeManagerServer.Co" +
-                "ntext.OrderItem\" Role=\"Order_OrderItems_Target\" Multiplicity=\"*\" /><ReferentialC" +
-                "onstraint><Principal Role=\"Order_OrderItems_Source\"><PropertyRef Name=\"Id\" /></P" +
-                "rincipal><Dependent Role=\"Order_OrderItems_Target\"><PropertyRef Name=\"OrderId\" /" +
-                "></Dependent></ReferentialConstraint></Association><Association Name=\"OrderItem_" +
-                "MenuItem\"><End Type=\"CaffeManagerServer.Context.MenuItem\" Role=\"OrderItem_MenuIt" +
-                "em_Target\" Multiplicity=\"1\"><OnDelete Action=\"Cascade\" /></End><End Type=\"CaffeM" +
-                "anagerServer.Context.OrderItem\" Role=\"OrderItem_MenuItem_Source\" Multiplicity=\"*" +
-                "\" /><ReferentialConstraint><Principal Role=\"OrderItem_MenuItem_Target\"><Property" +
-                "Ref Name=\"Id\" /></Principal><Dependent Role=\"OrderItem_MenuItem_Source\"><Propert" +
-                "yRef Name=\"MenuItemId\" /></Dependent></ReferentialConstraint></Association><Enti" +
-                "tyContainer Name=\"CaffeDbContext\" m:IsDefaultEntityContainer=\"true\"><EntitySet N" +
-                "ame=\"Cashiers\" EntityType=\"CaffeManagerServer.Context.Cashier\" /><EntitySet Name" +
-                "=\"Managers\" EntityType=\"CaffeManagerServer.Context.Manager\" /><EntitySet Name=\"O" +
-                "rders\" EntityType=\"CaffeManagerServer.Context.Order\" /><EntitySet Name=\"OrderIte" +
-                "ms\" EntityType=\"CaffeManagerServer.Context.OrderItem\" /><EntitySet Name=\"MenuIte" +
-                "ms\" EntityType=\"CaffeManagerServer.Context.MenuItem\" /><Ent";
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-            private const string ModelPart1 = @"itySet Name=""zComplexType_CashierStatsModel"" EntityType=""CaffeManagerServer.Context.CashierStatsModel"" /><FunctionImport Name=""GetCashierStats"" ReturnType=""Collection(CaffeManagerServer.Context.CashierStatsModel)"" EntitySet=""zComplexType_CashierStatsModel"" m:HttpMethod=""GET""><Parameter Name=""cashierId"" Type=""Edm.Int32"" Nullable=""false"" /><Parameter Name=""statsPeriod"" Type=""Edm.Int32"" Nullable=""false"" /></FunctionImport><AssociationSet Name=""Manager_Cashiers"" Association=""CaffeManagerServer.Context.Manager_Cashiers""><End Role=""Manager_Cashiers_Target"" EntitySet=""Cashiers"" /><End Role=""Manager_Cashiers_Source"" EntitySet=""Managers"" /></AssociationSet><AssociationSet Name=""Cashier_Orders"" Association=""CaffeManagerServer.Context.Cashier_Orders""><End Role=""Cashier_Orders_Source"" EntitySet=""Cashiers"" /><End Role=""Cashier_Orders_Target"" EntitySet=""Orders"" /></AssociationSet><AssociationSet Name=""Order_OrderItems"" Association=""CaffeManagerServer.Context.Order_OrderItems""><End Role=""Order_OrderItems_Source"" EntitySet=""Orders"" /><End Role=""Order_OrderItems_Target"" EntitySet=""OrderItems"" /></AssociationSet><AssociationSet Name=""OrderItem_MenuItem"" Association=""CaffeManagerServer.Context.OrderItem_MenuItem""><End Role=""OrderItem_MenuItem_Source"" EntitySet=""OrderItems"" /><End Role=""OrderItem_MenuItem_Target"" EntitySet=""MenuItems"" /></AssociationSet></EntityContainer></Schema></edmx:DataServices></edmx:Edmx>";
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-            private static string GetConcatenatedEdmxString()
-            {
-                return string.Concat(ModelPart0, ModelPart1);
-            }
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-            public static global::Microsoft.Data.Edm.IEdmModel GetInstance()
-            {
-                return ParsedModel;
-            }
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-            private static global::Microsoft.Data.Edm.IEdmModel LoadModelFromString()
-            {
-                string edmxToParse = GetConcatenatedEdmxString();
-                global::System.Xml.XmlReader reader = CreateXmlReader(edmxToParse);
-                try
-                {
-                    return global::Microsoft.Data.Edm.Csdl.EdmxReader.Parse(reader);
-                }
-                finally
-                {
-                    ((global::System.IDisposable)(reader)).Dispose();
-                }
-            }
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-            private static global::System.Xml.XmlReader CreateXmlReader(string edmxToParse)
-            {
-                return global::System.Xml.XmlReader.Create(new global::System.IO.StringReader(edmxToParse));
-            }
         }
     }
     /// <summary>
@@ -1066,6 +936,17 @@ namespace CaffeManager.CafeManagerServiceReference
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         private Order _Order;
+
+        public OrderItem(MenuItem newItem)
+        {
+            this.MenuItem = newItem;
+        }
+
+        public OrderItem()
+        {
+            this.MenuItem = new MenuItem();
+        }
+
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         public event global::System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
