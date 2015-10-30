@@ -15,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CaffeManager.Extension;
+using CaffeManager.Contexts;
 
 namespace CaffeManager.View
 {
@@ -25,34 +27,30 @@ namespace CaffeManager.View
     {
         public ManagerMainPageModel Model { get; set; }
         CaffeDbContext _context;
-        WebApiClient _client;
 
-        public ManagerMainPage(WebApiClient client)
+        public ManagerMainPage(CafeManagerLib.SharedModels.UserClientModel userModel)
         {
+            _context = CaffeDataContext.Instance;
             InitializeComponent();
-
-            _client = client;
 
             Model = new ManagerMainPageModel()
             {
-                Name = client.GetUserInfo().Name,
+                Name = userModel.Name,
+                StatsPeriod = 0,
                 Cashiers = new DataServiceCollection<Cashier>(),
-                CashierOrders = new DataServiceCollection<Order>()
+                CashierStats = new List<CashierStatsModel>()
             };
 
-            _context = InitContext();
-
             DataContext = Model;
-
             try
             {
                 var manager = _context.Managers.Where(m => m.Name == Model.Name).FirstOrDefault();
 
                 var cashiersQuery = from cashier in _context.Cashiers
-                            where cashier.ManagerId == manager.Id 
-                            select cashier;
+                                    where cashier.ManagerId == manager.Id
+                                    select cashier;
 
-                Model.Cashiers = new DataServiceCollection<Cashier>(cashiersQuery);               
+                Model.Cashiers = new DataServiceCollection<Cashier>(cashiersQuery);
             }
             catch (DataServiceQueryException ex)
             {
@@ -63,25 +61,67 @@ namespace CaffeManager.View
                 MessageBox.Show("The following error occurred:\n" + ex.ToString());
             }
         }
-        private CaffeDbContext InitContext()
-        {
-            CaffeDbContext context = new CaffeDbContext(new Uri(_client.AppPath + "/CaffeDataService.svc"));
-            context.SendingRequest += new EventHandler<SendingRequestEventArgs>(OnSendingRequest);
-            return context;
-        }
-        private void OnSendingRequest(object sender, SendingRequestEventArgs e)
-        {
-            // Add an Authorization header that contains an OAuth WRAP access token to the request.
-            e.RequestHeaders.Add("Authorization", "Bearer " + _client.Token);
-        }
+       
 
         private void CashiersListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int cashierId = ((Cashier)((ListView)sender).SelectedItem).Id;
 
-            var orders = _context.Orders.Where(oi => oi.CashierId == cashierId);
+            Model.CashierStats = new List<CashierStatsModel>();
+            Model.CashierStats = CaffeDataServiceExtension.GetCashierStats(_context, cashierId, Model.StatsPeriod).ToList();
+        }
 
-            Model.CashierOrders = new DataServiceCollection<Order>(orders);
+        private void AddCashier_Click(object sender, RoutedEventArgs e)
+        {
+            var manager = (from m in _context.Managers.Expand("Cashiers")
+                           where m.Name == Model.Name
+                           select m).Single();
+
+            _context.LoadProperty(manager, "Cashiers");
+            var newCashier = Cashier.CreateCashier(5, manager.Id);
+
+            var result = new CashierAddWindow(newCashier);
+            if (result.ShowDialog() == true)
+            {
+                try
+                {
+                    _context.AddRelatedObject(manager, "Cashiers", newCashier);
+                    _context.SetLink(newCashier, "Manager", manager);
+
+                    manager.Cashiers.Add(newCashier);
+                    newCashier.Manager = manager;
+
+                    // Send the insert to the data service.
+                    DataServiceResponse response = _context.SaveChanges();
+
+                    // Enumerate the returned responses.
+                    foreach (ChangeOperationResponse change in response)
+                    {
+                        // Get the descriptor for the entity.
+                        EntityDescriptor descriptor = change.Descriptor as EntityDescriptor;
+
+                        if (descriptor != null)
+                        {
+                            Cashier addedCashier = descriptor.Entity as Cashier;
+
+                            if (addedCashier != null)
+                            {
+                                Console.WriteLine("New product added with ID {0}.",
+                                    addedCashier.Id);
+                            }
+                        }
+                    }
+                    MessageBox.Show("Seccess");
+                }
+                catch (DataServiceRequestException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error");
+            }
         }
     }
 }

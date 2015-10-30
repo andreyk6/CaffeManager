@@ -1,4 +1,5 @@
-﻿using CaffeManager.Model;
+﻿using CaffeManager.Contexts;
+using CaffeManager.Model;
 using CaffeManagerLib.SharedModels;
 using Newtonsoft.Json;
 using System;
@@ -41,31 +42,41 @@ namespace CaffeManager.View
 
         private void Signin_Click(object sender, RoutedEventArgs e)
         {
+            //Pass password from View to Model
             Model.Password = userPassword.Password;
 
+            //Try to signin
             WebApiClient client;
-            try {
+            try
+            {
                 client = new WebApiClient(@"http://localhost:58156", Model.Login, Model.Password);
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 MessageBox.Show(exc.Message);
                 return;
             }
 
-            var userData = client.GetUserInfo();
+            //Initialize DataContext with Url and Access token
+            CaffeDataContext.InitializeContext(@"http://localhost:58156/CaffeDataService.svc", client.Token);
 
-            if (userData.Role == UserRoles.Manager.ToString())
+            NavigateNextPage(client);
+        }
+
+        private void NavigateNextPage(WebApiClient client)
+        {
+            var userModel = client.GetUserInfo();
+
+            if (userModel.Role == UserRoles.Manager.ToString())
             {
-                NavigationService.Navigate(new ManagerMainPage(client));
+                NavigationService.Navigate(userModel);
             }
-            if (userData.Role == UserRoles.Cashier.ToString())
+            if (userModel.Role == UserRoles.Cashier.ToString())
             {
                 NavigationService.Navigate(new CashierMainPage());
             }
         }
 
 
-        
     }
 }
