@@ -1,4 +1,5 @@
 ﻿using CaffeManager.CafeManagerServiceReference;
+using CaffeManager.Contexts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,9 +12,16 @@ namespace CaffeManager.Model
 {
     public class ManagerMainPageModel : INotifyPropertyChanged
     {
+        private CaffeDataContext _context;
         private string _name;
         private string _token;
+        private IEnumerable<CashierStatsModel> _cashierStats;
+        private IEnumerable<Cashier> _cashiers;
+        private int _statsPeriod;
 
+        public ManagerMainPageModel()
+        {
+        }
         public string Name
         {
             get { return _name; }
@@ -27,9 +35,7 @@ namespace CaffeManager.Model
             }
         }
 
-        private DataServiceCollection<Cashier> _cashiers;
-
-        public DataServiceCollection<Cashier> Cashiers
+        public IEnumerable<Cashier> Cashiers
         {
             get { return _cashiers; }
             set
@@ -42,21 +48,34 @@ namespace CaffeManager.Model
             }
         }
 
-        private DataServiceCollection<Order> _cashierOrders;
-
-        public DataServiceCollection<Order> CashierOrders
+        public int StatsPeriod
         {
-            get { return _cashierOrders; }
+            get
+            {
+                return _statsPeriod;
+            }
             set
             {
-                if (value == _cashierOrders)
+                if (value == _statsPeriod)
                     return;
 
-                _cashierOrders = value;
-                OnPropertyChanged("CashierOrders");
+                _statsPeriod = value;
+                OnPropertyChanged("SatsPeriod");
             }
         }
 
+        public IEnumerable<CashierStatsModel> CashierStats
+        {
+            get { return _cashierStats; }
+            set
+            {
+                if (value == _cashierStats)
+                    return;
+
+                _cashierStats = value;
+                OnPropertyChanged("CashierStats");
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)

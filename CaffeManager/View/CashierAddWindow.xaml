@@ -1,0 +1,25 @@
+﻿<Window x:Class="CaffeManager.View.CashierAddWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CaffeManager.View"
+        mc:Ignorable="d"
+        Title="CashierAddWindow" Height="300" Width="300">
+    <StackPanel>
+        <Label Content="Enter cashier data:" FontWeight="Bold" FontSize="13.333"/>
+        <DockPanel>
+            <Label Content="Name"></Label>
+            <TextBox Text="{Binding Name}"></TextBox>
+        </DockPanel>
+        <DockPanel>
+            <Label Content="Login"></Label>
+            <TextBox Text="{Binding Login}"></TextBox>
+        </DockPanel>
+        <DockPanel>
+            <Label Content="Password"></Label>
+            <TextBox Text="{Binding Password}"></TextBox>
+        </DockPanel>
+        <Button Content="Create" Click="Button_Click"></Button>
+    </StackPanel>
+</Window>

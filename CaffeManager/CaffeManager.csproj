@@ -92,17 +92,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Contexts\CaffeDataContext.cs" />
+    <Compile Include="Extension\CaffeDataServiceExtension.cs" />
     <Compile Include="Model\ManagerMainPageModel.cs" />
     <Compile Include="Service References\CafeManagerServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.datasvcmap</DependentUpon>
     </Compile>
+    <Compile Include="View\CashierAddWindow.xaml.cs">
+      <DependentUpon>CashierAddWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WebApiClient.cs" />
     <Resource Include="Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Resource>
+    <Page Include="View\CashierAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\CashierMainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -181,9 +190,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extension\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CafeManagerLib\CafeManagerLib.csproj">
       <Project>{ef767aac-f277-48e4-a955-fdaf2a5914d4}</Project>
