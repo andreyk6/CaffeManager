@@ -59,13 +59,20 @@ namespace CaffeManager.View
                 count = 1;
             }
             _model.AddNewItemToCurrentOrder(menuList.SelectedIndex, count);
-            ICollectionView view = CollectionViewSource.GetDefaultView(currOrd.ItemsSource);
-            view.Refresh();
+            RefreshView();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             _model.Save();
+            _model.CurrentOrder.Clear();
+            RefreshView();
+        }
+        private  void RefreshView()
+        {
+
+            ICollectionView view = CollectionViewSource.GetDefaultView(currOrd.ItemsSource);
+            view.Refresh();
         }
     }
 }
