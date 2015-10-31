@@ -31,7 +31,12 @@
                 <Label DockPanel.Dock="Left" Content="Password: "/>
                 <PasswordBox Name="userPassword" PasswordChar="*"/>
             </DockPanel>
+            <DockPanel Margin="0,5">
+                <Label DockPanel.Dock="Left" Content="App url: "/>
+                <TextBox Text="{Binding AppUrl}"/>
+            </DockPanel>
             <Button Name="Signin" Width="100" HorizontalAlignment="Right" Margin="0,5" Content="Sign In" Click="Signin_Click"/>
+            <ProgressBar Height="10"  Name="LoginProgressBar"  Visibility="Collapsed" IsIndeterminate="True"></ProgressBar>
         </StackPanel>
     </DockPanel>
 </Page>

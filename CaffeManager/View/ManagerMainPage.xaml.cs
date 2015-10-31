@@ -30,98 +30,36 @@ namespace CaffeManager.View
 
         public ManagerMainPage(CafeManagerLib.SharedModels.UserClientModel userModel)
         {
-            _context = CaffeDataContext.Instance;
             InitializeComponent();
+
+            _context = CaffeDataContext.Instance;
 
             Model = new ManagerMainPageModel()
             {
                 Name = userModel.Name,
-                StatsPeriod = 0,
-                Cashiers = new DataServiceCollection<Cashier>(),
-                CashierStats = new List<CashierStatsModel>()
             };
 
             DataContext = Model;
-            try
-            {
-                var manager = _context.Managers.Where(m => m.Name == Model.Name).FirstOrDefault();
 
-                var cashiersQuery = from cashier in _context.Cashiers
-                                    where cashier.ManagerId == manager.Id
-                                    select cashier;
-
-                Model.Cashiers = new DataServiceCollection<Cashier>(cashiersQuery);
-            }
-            catch (DataServiceQueryException ex)
-            {
-                MessageBox.Show("The query could not be completed:\n" + ex.ToString());
-            }
-            catch (InvalidOperationException ex)
-            {
-                MessageBox.Show("The following error occurred:\n" + ex.ToString());
-            }
+            Model.UpdateCashiersList();
         }
-       
+
 
         private void CashiersListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int cashierId = ((Cashier)((ListView)sender).SelectedItem).Id;
 
-            Model.CashierStats = new List<CashierStatsModel>();
-            Model.CashierStats = CaffeDataServiceExtension.GetCashierStats(_context, cashierId, Model.StatsPeriod).ToList();
+            Model.SellectedCashierId = cashierId;
+            Model.UpdateCashierStats();
         }
-
         private void AddCashier_Click(object sender, RoutedEventArgs e)
         {
-            var manager = (from m in _context.Managers.Expand("Cashiers")
-                           where m.Name == Model.Name
-                           select m).Single();
+            Model.AddCashier();
+        }
 
-            _context.LoadProperty(manager, "Cashiers");
-            var newCashier = Cashier.CreateCashier(5, manager.Id);
-
-            var result = new CashierAddWindow(newCashier);
-            if (result.ShowDialog() == true)
-            {
-                try
-                {
-                    _context.AddRelatedObject(manager, "Cashiers", newCashier);
-                    _context.SetLink(newCashier, "Manager", manager);
-
-                    manager.Cashiers.Add(newCashier);
-                    newCashier.Manager = manager;
-
-                    // Send the insert to the data service.
-                    DataServiceResponse response = _context.SaveChanges();
-
-                    // Enumerate the returned responses.
-                    foreach (ChangeOperationResponse change in response)
-                    {
-                        // Get the descriptor for the entity.
-                        EntityDescriptor descriptor = change.Descriptor as EntityDescriptor;
-
-                        if (descriptor != null)
-                        {
-                            Cashier addedCashier = descriptor.Entity as Cashier;
-
-                            if (addedCashier != null)
-                            {
-                                Console.WriteLine("New product added with ID {0}.",
-                                    addedCashier.Id);
-                            }
-                        }
-                    }
-                    MessageBox.Show("Seccess");
-                }
-                catch (DataServiceRequestException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Error");
-            }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Model.UpdateCashierStats();
         }
     }
 }

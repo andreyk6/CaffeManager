@@ -27,40 +27,48 @@ namespace CaffeManager.View
     public partial class Login : Page
     {
         public LoginModel Model { get; set; }
-         
+
         public Login()
         {
             InitializeComponent();
             Model = new LoginModel() {
                 Login = "manager1",
-                Password = "password"
+                Password = "password",
             };
             DataContext = Model;
 
             userPassword.Password = Model.Password;
         }
 
-        private void Signin_Click(object sender, RoutedEventArgs e)
+        private async void Signin_Click(object sender, RoutedEventArgs e)
         {
-            //Pass password from View to Model
-            Model.Password = userPassword.Password;
+            LoginProgressBar.Visibility = Visibility.Visible;
+            await LoginAsync();
+            LoginProgressBar.Visibility = Visibility.Collapsed;
+        }
 
-            //Try to signin
-            WebApiClient client;
-            try
-            {
-                client = new WebApiClient(@"http://localhost:58156", Model.Login, Model.Password);
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show(exc.Message);
-                return;
-            }
+        private Task LoginAsync()
+        {
+            return Task.Factory.StartNew(() => {
+                //Pass password from View to Model
+                Model.Password = userPassword.Password;
 
-            //Initialize DataContext with Url and Access token
-            CaffeDataContext.InitializeContext(@"http://localhost:58156/CaffeDataService.svc", client.Token);
+                //Try to signin
+                WebApiClient client;
+                try
+                {
+                    client = new WebApiClient(@Model.AppUrl, Model.Login, Model.Password);
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show(exc.Message);
+                    return;
+                }
 
-            NavigateNextPage(client);
+                //Initialize DataContext with Url and Access token
+                CaffeDataContext.InitializeContext(@Model.AppUrl + @"/CaffeDataService.svc", client.Token);
+                this.Dispatcher.Invoke(() => NavigateNextPage(client));
+            });
         }
 
         private void NavigateNextPage(WebApiClient client)

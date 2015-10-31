@@ -8,11 +8,12 @@
       xmlns:chart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
       xmlns:SharedModels="clr-namespace:CafeManagerLib.SharedModels;assembly=CafeManagerLib" x:Class="CaffeManager.View.ManagerMainPage"
       mc:Ignorable="d" 
+    Width="600"
       Title="ManagerMainPage">
     <DockPanel>
         <DockPanel DockPanel.Dock="Left">
-            <Label DockPanel.Dock="Top" Content="Your cashiers"/>
-            <Button DockPanel.Dock="Bottom" Click="AddCashier_Click" x:Name="AddCashier" Content="Add cashier"/>
+            <Label DockPanel.Dock="Top" Content="Your cashiers" FontSize="13.333"/>
+            <Button DockPanel.Dock="Bottom" Click="AddCashier_Click" x:Name="AddCashier" Height="30" Content="Add cashier"/>
             <ListView x:Name="CashiersListBox" SelectionChanged="CashiersListBox_SelectionChanged"  DockPanel.Dock="Bottom" ItemsSource="{Binding Cashiers}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -23,15 +24,22 @@
         </DockPanel>
         <Border Width="1" Margin="2" Background="#8888"/>
         <StackPanel DockPanel.Dock="Top">
-            <Label Content="Settings:" />
             <DockPanel>
-                <CheckBox x:Name="ServedVisitors" Content="Number of served visitors"/>
-                <CheckBox x:Name="Profit" Content="Sales profit"/>
-                <CheckBox x:Name="AvgProfit" Content="Average profit per visitor"/>
+                <Button DockPanel.Dock="Right" Click="Button_Click"> 
+                    <Button.Content>
+                        <Image Width="30" Source="/Content/refresh.png"/>
+                    </Button.Content>
+                </Button>
+                <Label Content="Settings:" FontSize="13.333"/>
+            </DockPanel>
+            <DockPanel>
+                <CheckBox x:Name="ServedVisitors" Content="Number of served visitors" FontSize="13.333"/>
+                <CheckBox x:Name="Profit" Content="Sales profit" FontSize="13.333"/>
+                <CheckBox x:Name="AvgProfit" Content="Average profit per visitor" FontSize="13.333"/>
             </DockPanel>
             <Border Height="1" Margin="2" Background="#8888"/>
             <DockPanel>
-                <Label Content="Group the stats in periods:"/>
+                <Label Content="Group the stats in periods:" FontSize="13.333"/>
                 <ComboBox >
                     <ComboBox.Items>
                         <Label Content="Day"></Label>
@@ -55,7 +63,7 @@
 						ItemsSource="{Binding CashierStats}" />
                 </chart:ClusteredColumnChart.Series>
             </chart:ClusteredColumnChart>
-            <!-- Stats -->
+            <Label Content="{Binding InfoMessage}" Margin="2" Background="LightGray" FontSize="14"/>
         </StackPanel>
     </DockPanel>
 </Page>

@@ -158,3 +158,6 @@ $RECYCLE.BIN/
 # Mac desktop service store files
 .DS_Store
 packages/
+CaffeManager/Service References/CafeManagerServiceReference/Reference.cs
+CaffeManager/Service References/CafeManagerServiceReference/Reference.cs.orig
+CaffeManager/Service References/CafeManagerServiceReference/Reference.datasvcmap
