@@ -33,7 +33,7 @@ namespace CaffeManager.View
             InitializeComponent();
             Model = new LoginModel() {
                 Login = "manager1",
-                Password = "password"
+                Password = "password",
             };
             DataContext = Model;
 
@@ -57,7 +57,7 @@ namespace CaffeManager.View
                 WebApiClient client;
                 try
                 {
-                    client = new WebApiClient(@"http://localhost:58156", Model.Login, Model.Password);
+                    client = new WebApiClient(@Model.AppUrl, Model.Login, Model.Password);
                 }
                 catch (Exception exc)
                 {
@@ -66,7 +66,7 @@ namespace CaffeManager.View
                 }
 
                 //Initialize DataContext with Url and Access token
-                CaffeDataContext.InitializeContext(@"http://localhost:58156/CaffeDataService.svc", client.Token);
+                CaffeDataContext.InitializeContext(@Model.AppUrl + @"/CaffeDataService.svc", client.Token);
                 this.Dispatcher.Invoke(() => NavigateNextPage(client));
             });
         }

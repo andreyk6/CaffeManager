@@ -39,6 +39,21 @@ namespace CaffeManager.Model
             }
         }
 
+        private string _appUrl;
+
+        public string AppUrl
+        {
+            get { return _appUrl; }
+            set
+            {
+                if (value == _appUrl)
+                    return;
+
+                _appUrl = value;
+                OnPropertyChanged("AppUrl");
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)
