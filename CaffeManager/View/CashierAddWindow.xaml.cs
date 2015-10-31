@@ -23,9 +23,9 @@ namespace CaffeManager.View
         public CashierAddWindow(Cashier cashier)
         {
             InitializeComponent();
-            cashier.Name = "Cashier 3";
-            cashier.Login = "cashier3";
-            cashier.Password = "cashier3pass";
+            cashier.Name = "";
+            cashier.Login = "";
+            cashier.Password = "";
             cashier.Role = "Cashier";
             DataContext = cashier;
         }
