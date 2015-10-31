@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="89a9a815-ad71-4a65-b7b7-b31934381812" xmlns="urn:schemas-microsoft-com:xml-dataservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="77ee8496-fb48-4bfa-bd45-db6b4bd60afe" xmlns="urn:schemas-microsoft-com:xml-dataservicemap">
   <MetadataSources>
-    <MetadataSource Address="http://localhost:58156/CaffeDataService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:58156/CaffeDataService.svc/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.edmx" MetadataType="Edmx" ID="75e69d8f-d61a-4c42-bc7a-196ebd1e2a8e" SourceId="1" SourceUrl="http://localhost:58156/CaffeDataService.svc" />
+    <MetadataFile FileName="service.edmx" MetadataType="Edmx" ID="ec057263-e929-4151-a72e-dc26d30e477f" SourceId="1" SourceUrl="http://localhost:58156/CaffeDataService.svc/" />
   </Metadata>
   <Extensions />
   <Parameters>

@@ -56,5 +56,10 @@ namespace CaffeManager.View
         {
             Model.AddCashier();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Model.UpdateCashierStats();
+        }
     }
 }
