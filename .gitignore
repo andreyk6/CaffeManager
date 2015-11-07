@@ -161,3 +161,4 @@ packages/
 CaffeManager/Service References/CafeManagerServiceReference/Reference.cs
 CaffeManager/Service References/CafeManagerServiceReference/Reference.cs.orig
 CaffeManager/Service References/CafeManagerServiceReference/Reference.datasvcmap
+.vs/config/applicationhost.config

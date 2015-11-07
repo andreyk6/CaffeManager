@@ -148,7 +148,7 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="ClassDiagram2.cd" />
+    <Content Include="Web1.config" />
     <None Include="Properties\PublishProfiles\Caffe-Manager.pubxml" />
     <Content Include="Web.config" />
     <None Include="Web.Debug.config">
@@ -156,6 +156,12 @@
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web1.Debug.config">
+      <DependentUpon>Web1.config</DependentUpon>
+    </None>
+    <None Include="Web1.Release.config">
+      <DependentUpon>Web1.config</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
