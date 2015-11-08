@@ -8,6 +8,7 @@ namespace CaffeManagerLib.SharedModels
 {
     public enum UserRoles
     {
+        SuperUser,
         Manager,
         Cashier
     }
