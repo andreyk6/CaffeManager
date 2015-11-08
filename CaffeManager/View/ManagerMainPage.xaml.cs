@@ -27,6 +27,7 @@ namespace CaffeManager.View
     {
         public ManagerMainPageModel Model { get; set; }
         CaffeDbContext _context;
+        private object userModel;
 
         public ManagerMainPage(CafeManagerLib.SharedModels.UserClientModel userModel)
         {
@@ -44,6 +45,10 @@ namespace CaffeManager.View
             Model.UpdateCashiersList();
         }
 
+        public ManagerMainPage(object userModel)
+        {
+            this.userModel = userModel;
+        }
 
         private void CashiersListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

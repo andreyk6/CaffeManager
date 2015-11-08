@@ -4,10 +4,13 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CaffeManager"
+      xmlns:qc="http://QuickConverter.CodePlex.com/"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="Login">
-
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Page.Resources>
     <DockPanel Background="White">
         <Grid DockPanel.Dock="Top" Height="100">
             <Grid.Background>
@@ -29,14 +32,14 @@
             </DockPanel>
             <DockPanel Margin="0,5">
                 <Label DockPanel.Dock="Left" Content="Password: "/>
-                <PasswordBox Name="userPassword" PasswordChar="*"/>
+                <PasswordBox Name="userPassword" PasswordChar="*" KeyUp="userPassword_KeyUp"/>
             </DockPanel>
             <DockPanel Margin="0,5">
                 <Label DockPanel.Dock="Left" Content="App url: "/>
                 <TextBox Text="{Binding AppUrl}"/>
             </DockPanel>
-            <Button Name="Signin" Width="100" HorizontalAlignment="Right" Margin="0,5" Content="Sign In" Click="Signin_Click"/>
-            <ProgressBar Height="10"  Name="LoginProgressBar"  Visibility="Collapsed" IsIndeterminate="True"></ProgressBar>
+            <Button Name="Signin" Width="100" IsEnabled="{qc:Binding '!$P', P={Binding Path=CommandExecuting}}" HorizontalAlignment="Right" Margin="0,5" Content="Sign In" Command="{Binding LoginCommand}"/>
+            <ProgressBar Height="10"  Name="LoginProgressBar"  Visibility="{Binding Path=CommandExecuting, Converter={StaticResource BoolToVis}}" IsIndeterminate="True"></ProgressBar>
         </StackPanel>
     </DockPanel>
 </Page>

@@ -31,7 +31,7 @@ namespace CaffeManager.View
         public Login()
         {
             InitializeComponent();
-            Model = new LoginModel() {
+            Model = new LoginModel(this) {
                 Login = "manager1",
                 Password = "password",
             };
@@ -40,51 +40,10 @@ namespace CaffeManager.View
             userPassword.Password = Model.Password;
         }
 
-        private async void Signin_Click(object sender, RoutedEventArgs e)
+        private void userPassword_KeyUp(object sender, KeyEventArgs e)
         {
-            LoginProgressBar.Visibility = Visibility.Visible;
-            await LoginAsync();
-            LoginProgressBar.Visibility = Visibility.Collapsed;
+            //Implement Password binding
+            Model.Password = userPassword.Password;
         }
-
-        private Task LoginAsync()
-        {
-            return Task.Factory.StartNew(() => {
-                //Pass password from View to Model
-                Model.Password = userPassword.Password;
-
-                //Try to signin
-                WebApiClient client;
-                try
-                {
-                    client = new WebApiClient(@Model.AppUrl, Model.Login, Model.Password);
-                }
-                catch (Exception exc)
-                {
-                    MessageBox.Show(exc.Message);
-                    return;
-                }
-
-                //Initialize DataContext with Url and Access token
-                CaffeDataContext.InitializeContext(@Model.AppUrl + @"/CaffeDataService.svc", client.Token);
-                this.Dispatcher.Invoke(() => NavigateNextPage(client));
-            });
-        }
-
-        private void NavigateNextPage(WebApiClient client)
-        {
-            var userModel = client.GetUserInfo();
-
-            if (userModel.Role == UserRoles.Manager.ToString())
-            {
-                NavigationService.Navigate(new ManagerMainPage(userModel));
-            }
-            if (userModel.Role == UserRoles.Cashier.ToString())
-            {
-                NavigationService.Navigate(new CashierMainPage(userModel));
-            }
-        }
-
-
     }
 }
