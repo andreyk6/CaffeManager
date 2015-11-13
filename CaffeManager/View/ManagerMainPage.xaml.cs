@@ -45,9 +45,20 @@ namespace CaffeManager.View
             Model.UpdateCashiersList();
         }
 
-        public ManagerMainPage(object userModel)
+        public ManagerMainPage(Manager manager)
         {
-            this.userModel = userModel;
+            InitializeComponent();
+
+            _context = CaffeDataContext.Instance;
+
+            Model = new ManagerMainPageModel()
+            {
+                Name = manager.Name,
+            };
+
+            DataContext = Model;
+
+            Model.UpdateCashiersList();
         }
 
         private void CashiersListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -1,0 +1,32 @@
+﻿<Page x:Class="CaffeManager.View.SuperuserMainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CaffeManager.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="600"
+      Title="SuperuserMainPage">
+    <DockPanel>
+        <TabControl >
+            <TabItem Header="Managers" >
+                <DockPanel>
+                    <DockPanel>
+                        <Label DockPanel.Dock="Top" Content="Your managers" FontSize="13.333"/>
+                        <Button DockPanel.Dock="Bottom" Command="{Binding AddManagerCommand}" Height="30" Content="Add manager"/>
+                        <ListView MinWidth="100" MinHeight="300" DockPanel.Dock="Left" ItemsSource="{Binding Managers}" SelectedItem="{Binding SelectedManager}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding Name}"/>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </DockPanel>
+                    <Frame DockPanel.Dock="Right" MinWidth="300" Background="AntiqueWhite" Content="{Binding ManagerMainPage}"/>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Catalog items">
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Page>

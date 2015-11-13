@@ -90,21 +90,36 @@
     <Compile Include="Extension\RelayAsyncCommand.cs" />
     <Compile Include="Model\CashierPageModel.cs" />
     <Compile Include="Model\ManagerMainPageModel.cs" />
+    <Compile Include="Model\SuperuserMainPageViewModel.cs" />
     <Compile Include="Service References\CafeManagerServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.datasvcmap</DependentUpon>
     </Compile>
-    <Compile Include="View\CashierAddWindow.xaml.cs">
-      <DependentUpon>CashierAddWindow.xaml</DependentUpon>
+    <Compile Include="View\AddManagerWindow.xaml.cs">
+      <DependentUpon>AddManagerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddCashierWindow.xaml.cs">
+      <DependentUpon>AddCashierWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CashierMainPage.xaml.cs" />
+    <Compile Include="View\SuperuserMainPage.xaml.cs">
+      <DependentUpon>SuperuserMainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WebApiClient.cs" />
+    <Page Include="View\AddManagerWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\SuperuserMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Resource Include="Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Resource>
-    <Page Include="View\CashierAddWindow.xaml">
+    <Page Include="View\AddCashierWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

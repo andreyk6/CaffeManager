@@ -157,7 +157,7 @@ namespace CaffeManager.Model
             _context.LoadProperty(manager, "Cashiers");
             var newCashier = Cashier.CreateCashier(0, manager.Id);
 
-            var result = new CashierAddWindow(newCashier);
+            var result = new AddCashierWindow(newCashier);
             if (result.ShowDialog() == true)
             {
                 try

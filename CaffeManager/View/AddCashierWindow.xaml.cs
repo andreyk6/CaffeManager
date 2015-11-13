@@ -18,9 +18,9 @@ namespace CaffeManager.View
     /// <summary>
     /// Логика взаимодействия для CashierAddWindow.xaml
     /// </summary>
-    public partial class CashierAddWindow : Window
+    public partial class AddCashierWindow: Window
     {
-        public CashierAddWindow(Cashier cashier)
+        public AddCashierWindow(Cashier cashier)
         {
             InitializeComponent();
             cashier.Name = "";

@@ -129,6 +129,10 @@ namespace CaffeManager.Model
                 {
                     _hostPage.Dispatcher.Invoke(() => _hostPage.NavigationService.Navigate(new CashierMainPage(userModel)));
                 }
+                if (userModel.Role == UserRoles.SuperUser.ToString())
+                {
+                    _hostPage.Dispatcher.Invoke(() => _hostPage.NavigationService.Navigate(new SuperuserMainPage(userModel)));
+                }
                 return true;
             }).ContinueWith((result) => CommandExecuting = false);
         }
