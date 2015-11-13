@@ -19,11 +19,24 @@
           <PropertyRef Name="Id" />
         </Key>
         <Property Name="Id" Type="Edm.Int32" Nullable="false" p6:StoreGeneratedPattern="Identity" xmlns:p6="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+        <Property Name="SuperUserId" Type="Edm.Int32" Nullable="false" />
         <Property Name="Name" Type="Edm.String" MaxLength="Max" FixedLength="false" Unicode="true" />
         <Property Name="Login" Type="Edm.String" MaxLength="Max" FixedLength="false" Unicode="true" />
         <Property Name="Password" Type="Edm.String" MaxLength="Max" FixedLength="false" Unicode="true" />
         <Property Name="Role" Type="Edm.String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        <NavigationProperty Name="Superuser" Relationship="CaffeManagerServer.Context.Superuser_Managers" ToRole="Superuser_Managers_Source" FromRole="Superuser_Managers_Target" />
         <NavigationProperty Name="Cashiers" Relationship="CaffeManagerServer.Context.Manager_Cashiers" ToRole="Manager_Cashiers_Target" FromRole="Manager_Cashiers_Source" />
+      </EntityType>
+      <EntityType Name="Superuser">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Int32" Nullable="false" p6:StoreGeneratedPattern="Identity" xmlns:p6="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+        <Property Name="Name" Type="Edm.String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        <Property Name="Login" Type="Edm.String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        <Property Name="Password" Type="Edm.String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        <Property Name="Role" Type="Edm.String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        <NavigationProperty Name="Managers" Relationship="CaffeManagerServer.Context.Superuser_Managers" ToRole="Superuser_Managers_Target" FromRole="Superuser_Managers_Source" />
       </EntityType>
       <EntityType Name="Order">
         <Key>
@@ -97,6 +110,20 @@
           </Dependent>
         </ReferentialConstraint>
       </Association>
+      <Association Name="Superuser_Managers">
+        <End Type="CaffeManagerServer.Context.Superuser" Role="Superuser_Managers_Source" Multiplicity="1">
+          <OnDelete Action="Cascade" />
+        </End>
+        <End Type="CaffeManagerServer.Context.Manager" Role="Superuser_Managers_Target" Multiplicity="*" />
+        <ReferentialConstraint>
+          <Principal Role="Superuser_Managers_Source">
+            <PropertyRef Name="Id" />
+          </Principal>
+          <Dependent Role="Superuser_Managers_Target">
+            <PropertyRef Name="SuperUserId" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
       <Association Name="Order_OrderItems">
         <End Type="CaffeManagerServer.Context.Order" Role="Order_OrderItems_Source" Multiplicity="1">
           <OnDelete Action="Cascade" />
@@ -128,6 +155,7 @@
       <EntityContainer Name="CaffeDbContext" m:IsDefaultEntityContainer="true">
         <EntitySet Name="Cashiers" EntityType="CaffeManagerServer.Context.Cashier" />
         <EntitySet Name="Managers" EntityType="CaffeManagerServer.Context.Manager" />
+        <EntitySet Name="Superusers" EntityType="CaffeManagerServer.Context.Superuser" />
         <EntitySet Name="Orders" EntityType="CaffeManagerServer.Context.Order" />
         <EntitySet Name="OrderItems" EntityType="CaffeManagerServer.Context.OrderItem" />
         <EntitySet Name="MenuItems" EntityType="CaffeManagerServer.Context.MenuItem" />
@@ -143,6 +171,10 @@
         <AssociationSet Name="Cashier_Orders" Association="CaffeManagerServer.Context.Cashier_Orders">
           <End Role="Cashier_Orders_Source" EntitySet="Cashiers" />
           <End Role="Cashier_Orders_Target" EntitySet="Orders" />
+        </AssociationSet>
+        <AssociationSet Name="Superuser_Managers" Association="CaffeManagerServer.Context.Superuser_Managers">
+          <End Role="Superuser_Managers_Target" EntitySet="Managers" />
+          <End Role="Superuser_Managers_Source" EntitySet="Superusers" />
         </AssociationSet>
         <AssociationSet Name="Order_OrderItems" Association="CaffeManagerServer.Context.Order_OrderItems">
           <End Role="Order_OrderItems_Source" EntitySet="Orders" />

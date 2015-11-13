@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CaffeManagerServer.Entities
+namespace CaffeManagerServer.Enitites
 {
     public class Superuser:User
     {

@@ -15,6 +15,8 @@ namespace CaffeManagerServer.Enitites
             this.Role = UserRoles.Manager.ToString();
         }
 
+        public int SuperUserId { get; set; }
+        public virtual Superuser Superuser { get; set; }
         public virtual ICollection<Cashier> Cashiers { get; set; }
     }
 }

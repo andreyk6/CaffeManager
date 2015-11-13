@@ -10,6 +10,7 @@
     {
         public DbSet<Cashier> Cashiers { get; set; }
         public DbSet<Manager> Managers { get; set; }
+        public DbSet<Superuser> Superusers { get; set; }
         public DbSet<MenuItem> MenuItems { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
@@ -21,7 +22,10 @@
 
         public User GetUserByName(string userName)
         {
-            User user = Managers.ToList().FirstOrDefault(u => u.Login == userName);
+            User user;
+            user = Superusers.ToList().FirstOrDefault(u => u.Login == userName);
+            if (user == null)
+                user = Managers.ToList().FirstOrDefault(u => u.Login == userName);
             if (user == null)
                 user = Cashiers.ToList().FirstOrDefault(u => u.Login == userName);
 
@@ -40,6 +44,7 @@
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Superuser>().HasMany(s => s.Managers).WithRequired(m => m.Superuser);  
             modelBuilder.Entity<Manager>().HasMany(m => m.Cashiers).WithRequired(c => c.Manager);
             modelBuilder.Entity<Cashier>().HasMany(c => c.Orders).WithRequired(o => o.Cashier);
             modelBuilder.Entity<Order>().HasMany(o => o.OrderItems).WithRequired(oi => oi.Order);
@@ -53,8 +58,13 @@
     {
         protected override void Seed(CaffeDbContext context)
         {
+            Superuser superuser1 = new Superuser("superuser1", "password") { Name = "SuperUser 1" };
+            superuser1.Managers = new List<Manager>();
+
             var manager1 = new Manager("manager1", "password") { Name = "Manager 1" };
             manager1.Cashiers = new List<Cashier>();
+            superuser1.Managers.Add(manager1);
+            manager1.Superuser = superuser1;
 
             var cashier1 = new Cashier("cashier1", "password") { Name = "Cashier 1" };
             cashier1.Orders = new List<Order>();
@@ -70,8 +80,6 @@
             var menuItem4 = new MenuItem() { Name = "Soup4", Price = 500 };
             var menuItem5 = new MenuItem() { Name = "Soup5", Price = 50 };
             
-
-
             var order1 = new Order();
             order1.OrderItems = new List<OrderItem>();
             order1.DateTime = new System.DateTime(2012, 12, 21);
@@ -114,7 +122,6 @@
             order5.OrderItems.Add(orderItem5);
             order5.CloseOrder();
             
-
             context.MenuItems.Add(menuItem1);
             context.MenuItems.Add(menuItem2);
             context.MenuItems.Add(menuItem3);
@@ -137,6 +144,7 @@
             context.Cashiers.Add(cashier2);
 
             context.Managers.Add(manager1);
+            context.Superusers.Add(superuser1);
 
             context.SaveChanges();
             //base.Seed(context);
